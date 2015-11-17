@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <parser>
+        <target>docs/phpdoc</target>
+        <encoding>utf8</encoding>
+        <default-package-name>Default</default-package-name>
+    </parser>
+    <transformer>
+        <target>docs/phpdoc</target>
+    </transformer>
+    <files>
+        <directory>./src/</directory>
+    </files>
+    <transformations>
+        <template name="responsive-twig" />
+    </transformations>
+    <logging>
+        <level>warn</level>
+        <paths>
+            <default>./app/logs/phpdoc.log</default>
+            <errors>./app/logs/phpdoc.errors.log</errors>
+        </paths>
+    </logging>
+</phpdoc>

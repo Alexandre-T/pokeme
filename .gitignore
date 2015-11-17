@@ -1,3 +1,14 @@
-.buildpath
-.settings
-.project
+#Composer
+composer.lock
+composer.phar
+#cache
+app/cache/*
+app/logs/*
+app/config/parameters.yml
+#phpdoc Ignore everything in this directory
+docs/phpdoc/*
+#phpdoc Except these files
+!docs/phpdoc/readme.md
+#vendor or binary loaded by composer
+bin/*
+vendor/*
