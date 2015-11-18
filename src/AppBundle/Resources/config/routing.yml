@@ -3,3 +3,8 @@ pokeme_app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Default:index }
     methods: [GET]
+
+# Sonata Admin area
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin
