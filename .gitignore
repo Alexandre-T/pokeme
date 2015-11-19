@@ -12,3 +12,4 @@ docs/phpdoc/*
 #vendor or binary loaded by composer
 bin/*
 vendor/*
+web/bundles/*

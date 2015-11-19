@@ -1,0 +1,13 @@
+Application\Sonata\ClassificationBundle\Entity\Context:
+  type: entity
+  repositoryClass: Doctrine\ORM\EntityRepository
+  table: te_classification_context_ccn
+  id:
+    id:
+      type: string
+      column: id
+#      options:
+#        unsigned: true
+      generator:
+        strategy: NONE
+

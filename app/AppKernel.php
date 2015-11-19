@@ -25,8 +25,13 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            // My Extended Bundle
+            new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+            // My AppBundle
             new AppBundle\AppBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

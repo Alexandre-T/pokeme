@@ -1,0 +1,12 @@
+Application\Sonata\ClassificationBundle\Entity\Tag:
+  type: entity
+  repositoryClass: Doctrine\ORM\EntityRepository
+  table: te_classification_tag_cta
+  id:
+    id:
+      type: integer
+      column: id
+#      options:
+#        unsigned: true
+      generator:
+        strategy: AUTO

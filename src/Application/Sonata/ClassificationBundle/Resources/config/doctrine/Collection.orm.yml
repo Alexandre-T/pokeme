@@ -1,0 +1,12 @@
+Application\Sonata\ClassificationBundle\Entity\Collection:
+  type: entity
+  repositoryClass: Doctrine\ORM\EntityRepository
+  table: te_classification_collection_cco
+  id:
+    id:
+      type: integer
+      column: id
+#      options:
+#        unsigned: true
+      generator:
+        strategy: AUTO

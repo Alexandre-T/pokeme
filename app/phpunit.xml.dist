@@ -8,7 +8,8 @@
          bootstrap="bootstrap.php.cache"
 >
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Project PokeMe Test Suite">
+            <directory>../src/Application/Sonata/*Bundle/Tests</directory>
             <directory>../src/*/*Bundle/Tests</directory>
             <directory>../src/*/Bundle/*Bundle/Tests</directory>
             <directory>../src/*Bundle/Tests</directory>
@@ -25,6 +26,8 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
+                <directory>../src/Application/Sonata/*Bundle/Resources</directory>
+                <directory>../src/Application/Sonata/*Bundle/Resources/Tests</directory>
                 <directory>../src/*Bundle/Resources</directory>
                 <directory>../src/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>
