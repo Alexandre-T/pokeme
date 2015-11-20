@@ -19,8 +19,8 @@ namespace AppBundle\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Class JdrAppBundle
- * The main bundle of JDR application.
+ * Tests of Class AppBundle
+ * The main bundle of PokeMe application.
  *
  * @category Testing
  *

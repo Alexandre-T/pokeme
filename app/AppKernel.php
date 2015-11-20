@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             // Add Sonata dependencies
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
             // Add Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
@@ -27,6 +28,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
             // My Extended Bundle
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             // My AppBundle
@@ -49,3 +51,4 @@ class AppKernel extends Kernel
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
+

@@ -1,0 +1,10 @@
+Application\Sonata\MediaBundle\Entity\Media:
+  type: entity
+  repositoryClass: Doctrine\ORM\EntityRepository
+  table: te_media_med
+  id:
+    id:
+      type: integer
+      column: id
+      generator:
+        strategy: AUTO

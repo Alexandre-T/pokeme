@@ -20,8 +20,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class JdrAppBundle
- * The main bundle of JDR application.
+ * Tests of Class PokeMe DefaultController
+ * The main bundle of PokeMe application.
  *
  * @category Controller
  *

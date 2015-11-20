@@ -12,4 +12,6 @@ docs/phpdoc/*
 #vendor or binary loaded by composer
 bin/*
 vendor/*
+#web ignored files
 web/bundles/*
+web/media/*

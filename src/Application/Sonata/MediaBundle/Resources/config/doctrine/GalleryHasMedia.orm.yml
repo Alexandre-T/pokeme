@@ -1,0 +1,10 @@
+Application\Sonata\MediaBundle\Entity\GalleryHasMedia:
+  type: entity
+  repositoryClass: Doctrine\ORM\EntityRepository
+  table: te_galleryhasmedia_ghm
+  id:
+    id:
+      type: integer
+      column: id
+      generator:
+        strategy: AUTO
