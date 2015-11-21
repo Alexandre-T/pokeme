@@ -2,17 +2,20 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: sonata_block.yml }
     - { resource: sonata_classification.yml }
     - { resource: sonata_media.yml }
+    - { resource: sonata_user.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator: { fallback: fr }
+
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -33,7 +36,6 @@ framework:
         name:        "%session_name%"
     fragments:       ~
     http_method_override: true
-    translator: { fallback: fr }
 
 # Twig Configuration
 twig:
@@ -78,6 +80,9 @@ doctrine:
                     SonataClassificationBundle: ~
                     ApplicationSonataMediaBundle: ~
                     SonataMediaBundle: ~
+                    ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

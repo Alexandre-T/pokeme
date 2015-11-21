@@ -12,6 +12,7 @@ docs/phpdoc/*
 !docs/phpdoc/readme.md
 #vendor or binary loaded by composer
 bin/*
+output/*
 vendor/*
 #web ignored files
 web/bundles/*

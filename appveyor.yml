@@ -30,6 +30,7 @@ install:
   - echo extension=php_fileinfo.dll >> php.ini
   - echo extension=php_intl.dll >> php.ini
   - echo extension=php_pdo_mysql.dll >> php.ini
+  - echo extension=php_gd.dll >> php.ini
   - echo memory_limit=1G >> php.ini
 
 test_script:
@@ -42,9 +43,12 @@ test_script:
 #  - php composer.phar update %COMPOSER_FLAGS% --prefer-source --no-interaction --no-progress
   - php composer.phar update --prefer-source --no-interaction --no-progress
   - appveyor DownloadFile https://phar.phpunit.de/phpunit.phar
-#  - php app/console doctrine:migrations:migrate  --no-interaction
-#  - php app/console doctrine:fixtures:load -n --env=test
-  #launch tests
+  - php app/console doctrine:migrations:migrate  --no-interaction
+  - php app/console doctrine:fixtures:load -n --env=test
+  - php app/console fos:user:create testuser test@example.com secret
+  - php app/console fos:user:create inactiveuser inactive@example.com secret --inactive
+  - php app/console fos:user:create admin admin@example.com secret --super-admin
+#launch tests
   - cd c:\projects\alexandre-t\pokeme
   - php phpunit.phar -c app --verbose
 
