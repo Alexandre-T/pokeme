@@ -43,17 +43,21 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
     public function load(ObjectManager $em)
     {
 
-        $mots = 'érotique,fantastique,contemporain,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
+        //Dictionary Cooking
+        $mots  = 'érotique,fantastique,contemporain,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
+        $mots .= ',harry potter,ange,démon,vampire,lycanthrope';
         $mots = explode(',', $mots);
+        natsort($mots);
 
         foreach ($mots as $mot) {
             $tag = new Tag();
             $tag->setEnabled(true);
-            $tag->setContext($this->getReference('default-context'));
+            $tag->setContext($this->getReference('site-context'));
             $tag->setName($mot);
             $em->persist($tag);
             $this->addReference("tag-$mot", $tag);
         }
+        unset($mots);
         $em->flush();
     }
 

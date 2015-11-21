@@ -16,6 +16,7 @@
  */
 namespace AppBundle\DataFixtures\ORM;
 
+use Application\Sonata\ClassificationBundle\Entity\Collection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -41,7 +42,14 @@ class LoadCollectionData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function load(ObjectManager $em)
     {
-        //nothing to load
+        $defaultContext = $this->getReference('default-context');
+        $collection = new Collection();
+        $collection->setContext($defaultContext);
+        $collection->setEnabled(true);
+        $collection->setName('Concours');
+        $collection->setDescription('Dans cette collection, on associe tous les types de concours.');
+        $em->persist($collection);
+        $em->flush();
     }
 
     /**

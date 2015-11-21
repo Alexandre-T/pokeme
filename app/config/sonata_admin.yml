@@ -1,0 +1,7 @@
+sonata_admin:
+    title: Backend
+    security:
+        handler: sonata.admin.security.handler.role
+    templates:
+        # default global templates
+        layout:  SonataAdminBundle::layout.html.twig

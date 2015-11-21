@@ -23,18 +23,22 @@ class AppKernel extends Kernel
             //Sensio Bundle
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             // Add Sonata dependencies
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             // Add Sonata
-            new Sonata\CoreBundle\SonataCoreBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
-            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
             new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             // My Extended Bundle
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
