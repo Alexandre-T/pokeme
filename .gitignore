@@ -1,6 +1,7 @@
 #Composer
 composer.lock
 composer.phar
+phpunit.phar
 #cache
 app/cache/*
 app/logs/*

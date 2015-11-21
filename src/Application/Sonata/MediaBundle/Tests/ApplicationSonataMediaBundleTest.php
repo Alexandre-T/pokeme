@@ -26,28 +26,28 @@ use Application\Sonata\MediaBundle\ApplicationSonataMediaBundle;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class ApplicationMediaClassificationBundleTest extends \PHPUnit_Framework_TestCase
+class ApplicationMediaBundleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * ApplicationSonataClassificationBundle instance to test.
+     * ApplicationSonataMediaBundle instance to test.
      *
-     * @var ApplicationSonataClassificationBundle
+     * @var ApplicationSonataMediaBundle
      */
-    private $applicationSonataClassificationBundle;
+    private $applicationSonataMediaBundle;
     /**
      * Prepares the environment before running a test.
      */
     protected function setUp()
     {
         parent::setUp();
-        $this->applicationSonataClassificationBundle = new ApplicationSonataMediaBundle();
+        $this->applicationSonataMediaBundle = new ApplicationSonataMediaBundle();
     }
     /**
      * Cleans up the environment after running a test.
      */
     protected function tearDown()
     {
-        $this->applicationSonataClassificationBundle = null;
+        $this->applicationSonataMediaBundle = null;
         parent::tearDown();
     }
     /**
@@ -55,6 +55,6 @@ class ApplicationMediaClassificationBundleTest extends \PHPUnit_Framework_TestCa
      */
     public function testGetParent()
     {
-        $this->assertEquals('SonataMediaBundle', $this->applicationSonataClassificationBundle->getParent());
+        $this->assertEquals('SonataMediaBundle', $this->applicationSonataMediaBundle->getParent());
     }
 }

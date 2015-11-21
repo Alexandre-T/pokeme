@@ -16,7 +16,11 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            //Doctrine Bundles
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            //Sensio Bundle
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             // Add Sonata dependencies
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -26,11 +30,12 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Sonata\MediaBundle\SonataMediaBundle(),
             // My Extended Bundle
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             // My AppBundle
             new AppBundle\AppBundle(),
 
@@ -51,4 +56,3 @@ class AppKernel extends Kernel
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
-
