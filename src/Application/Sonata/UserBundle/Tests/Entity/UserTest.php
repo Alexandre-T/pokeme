@@ -16,10 +16,7 @@
  */
 namespace Application\Sonata\UserBundle\Tests\Entity;
 
-use Jdr\AppBundle\Entity\Personnage;
-use Jdr\PartenaireBundle\Entity\Site;
 use Application\Sonata\UserBundle\Entity\User as UserEntity;
-use Doctrine\Common\Collections\Collection;
 
 /**
  * Entity User Class Tests.
@@ -76,5 +73,4 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->user = new UserEntity();
         $this->assertNull($this->user->getId());
     }
-
 }

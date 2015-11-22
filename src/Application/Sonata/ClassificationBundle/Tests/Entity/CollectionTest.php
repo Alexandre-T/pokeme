@@ -15,7 +15,9 @@
  * @link http://opensource.org/licenses/GPL-3.0
  */
 namespace Application\Sonata\ClassificationBundle\Tests\Entity;
+
 use Application\Sonata\ClassificationBundle\Entity\Collection;
+
 /**
  * Class CollectionTest.
  *

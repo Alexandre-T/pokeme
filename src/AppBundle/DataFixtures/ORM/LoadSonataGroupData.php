@@ -43,7 +43,7 @@ class LoadSonataGroupData extends AbstractLoadData implements OrderedFixtureInte
     public function load(ObjectManager $em)
     {
 
-        /**
+        /*
          * @var \Sonata\UserBundle\Entity\GroupManager
          */
         $groupManager = $this->container->get('fos_user.group_manager');

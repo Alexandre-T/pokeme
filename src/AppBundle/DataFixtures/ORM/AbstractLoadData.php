@@ -32,7 +32,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
  * @license GNU General Public License, version 3
  *
  * @link http://opensource.org/licenses/GPL-3.0
- *
  */
 abstract class AbstractLoadData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -79,12 +78,10 @@ abstract class AbstractLoadData extends AbstractFixture implements OrderedFixtur
         }
 
         $kernel = $this->container->get('kernel');
-        if ($kernel instanceof KernelInterface){
-
+        if ($kernel instanceof KernelInterface) {
             return in_array($kernel->getEnvironment(), $environments);
         }
 
         return false;
     }
-
 }

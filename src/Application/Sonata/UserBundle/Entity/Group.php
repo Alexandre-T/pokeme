@@ -36,17 +36,17 @@ use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 class Group extends BaseGroup
 {
     /**
-     * Administrator Role
+     * Administrator Role.
      */
     const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
-     * Default authenticated Role
+     * Default authenticated Role.
      */
     const ROLE_USER = 'ROLE_USER';
 
     /**
-     * Super admin Role (root)
+     * Super admin Role (root).
      */
     const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
 

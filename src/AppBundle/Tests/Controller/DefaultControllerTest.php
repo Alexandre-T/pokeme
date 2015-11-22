@@ -32,7 +32,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class DefaultControllerTest extends WebTestCase
 {
     /**
-     * Test Index action
+     * Test Index action.
      */
     public function testIndex()
     {

@@ -19,7 +19,7 @@ namespace AppBundle\Tests\DataFixtures\ORM;
 use AppBundle\DataFixtures\ORM\AbstractLoadData;
 
 /**
- * Tests of Abstract Class AbstractLoadData
+ * Tests of Abstract Class AbstractLoadData.
  *
  * @category Testing
  *
@@ -38,22 +38,24 @@ class AbstractLoadDataTest extends \PHPUnit_Framework_TestCase
     private $abstractLoadData;
 
     /**
-     * Test the randTrueFalse method
+     * Test the randTrueFalse method.
      */
-    public function testRandTrueFalse(){
+    public function testRandTrueFalse()
+    {
         $randTrueFalse = self::getMethod('randTrueFalse');
 
         $this->assertFalse($randTrueFalse->invokeArgs($this->abstractLoadData, array(0)));
         $this->assertTrue($randTrueFalse->invokeArgs($this->abstractLoadData, array(101)));
-        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(25)),$this->isType('boolean'));
-        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(50)),$this->isType('boolean'));
-        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(75)),$this->isType('boolean'));
+        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(25)), $this->isType('boolean'));
+        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(50)), $this->isType('boolean'));
+        $this->assertThat($randTrueFalse->invokeArgs($this->abstractLoadData, array(75)), $this->isType('boolean'));
     }
 
     /**
-     * Test the isEnvironment method
+     * Test the isEnvironment method.
      */
-    public function testIsEnvironment(){
+    public function testIsEnvironment()
+    {
         $kernel = $this->getMock('Symfony\Component\HttpKernel\KernelInterface');
         $kernel->expects($this->any())
             ->method('getEnvironment')
@@ -71,14 +73,14 @@ class AbstractLoadDataTest extends \PHPUnit_Framework_TestCase
         $this->abstractLoadData->setContainer($container);
         $isEnvironment = self::getMethod('isEnvironment');
 
-        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo','bar'))));
-        $this->assertTrue($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo','expected'))));
+        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo', 'bar'))));
+        $this->assertTrue($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo', 'expected'))));
         $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array('foo')));
         $this->assertTrue($isEnvironment->invokeArgs($this->abstractLoadData, array('expected')));
 
         $this->abstractLoadData->setContainer($badContainer);
-        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo','bar'))));
-        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo','expected'))));
+        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo', 'bar'))));
+        $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array(array('foo', 'expected'))));
         $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array('foo')));
         $this->assertFalse($isEnvironment->invokeArgs($this->abstractLoadData, array('expected')));
     }
@@ -104,15 +106,18 @@ class AbstractLoadDataTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Set Accessible specified protected or private method
+     * Set Accessible specified protected or private method.
      *
      * @param $name
+     *
      * @return mixed
      */
-    protected static function getMethod($name) {
+    protected static function getMethod($name)
+    {
         $class = new \ReflectionClass('AppBundle\DataFixtures\ORM\AbstractLoadData');
         $method = $class->getMethod($name);
         $method->setAccessible(true);
+
         return $method;
     }
 }

@@ -14,7 +14,6 @@
  *
  * @link      http://opensource.org/licenses/GPL-3.0
  */
-
 namespace AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

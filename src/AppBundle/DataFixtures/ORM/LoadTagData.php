@@ -44,7 +44,7 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
     {
 
         //Dictionary Cooking
-        $mots  = 'érotique,fantastique,contemporain,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
+        $mots = 'érotique,fantastique,contemporain,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
         $mots .= ',harry potter,ange,démon,vampire,lycanthrope';
         $mots = explode(',', $mots);
         natsort($mots);

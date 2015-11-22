@@ -64,7 +64,7 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
     {
         //Données de tests
         if ($this->isEnvironment(array('test', 'dev'))) {
-            /**
+            /*
              * @var \Sonata\UserBundle\Entity\UserManager
              */
             $userManager = $this->container->get('fos_user.user_manager');
@@ -76,7 +76,7 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
 
             //Members creation
             for ($index = 1; $index < self::MEMBERS; ++$index) {
-                /**
+                /*
                  * @var \Application\Sonata\UserBundle\Entity\User
                  */
                 $members[$index] = $userManager->createUser();

@@ -15,7 +15,9 @@
  * @link http://opensource.org/licenses/GPL-3.0
  */
 namespace Application\Sonata\MediaBundle\Tests;
+
 use Application\Sonata\MediaBundle\ApplicationSonataMediaBundle;
+
 /**
  * Class ApplicationSonataMediaBundleTest.
  *
@@ -26,7 +28,7 @@ use Application\Sonata\MediaBundle\ApplicationSonataMediaBundle;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class ApplicationMediaBundleTest extends \PHPUnit_Framework_TestCase
+class ApplicationSonataMediaBundleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * ApplicationSonataMediaBundle instance to test.

@@ -49,9 +49,10 @@ class ApplicationSonataUserBundleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test getParent method
+     * Test getParent method.
      */
-    public function testGetParent(){
-        $this->assertEquals('SonataUserBundle',$this->applicationSonataUserBundle->getParent());
+    public function testGetParent()
+    {
+        $this->assertEquals('SonataUserBundle', $this->applicationSonataUserBundle->getParent());
     }
 }
