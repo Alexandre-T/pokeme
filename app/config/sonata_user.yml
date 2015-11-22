@@ -12,5 +12,16 @@ fos_user:
         user_manager: sonata.user.orm.user_manager
 
 sonata_user:
-    security_acl: true
+    security_acl: false
     manager_type: orm # can be orm or mongodb
+    class:
+        user:         Application\Sonata\UserBundle\Entity\User
+        group:        Application\Sonata\UserBundle\Entity\Group
+    table:
+        user_group: "tj_usergroup_usg"
+    profile:  # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
