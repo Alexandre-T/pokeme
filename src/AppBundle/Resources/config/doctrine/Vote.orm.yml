@@ -1,0 +1,57 @@
+AppBundle\Entity\Vote:
+  type: entity
+  table: te_vote_vot
+  id:
+    id:
+      type: bigint
+      column: vot_id
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+        comment: Identifiant du classement
+  fields:
+    created:
+      type: datetime
+      nullable: false
+      column: vot_creation
+      options:
+        comment: Creation date
+    ip:
+      type: bigint
+      nullable: false
+      column: vot_ip
+      options:
+        comment: IP du voteur
+    tracker:
+      type: guid
+      nullable: false
+      column: vot_tracker
+      options:
+        comment: Tracker GGUID du voteur
+  manyToOne:
+    user:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      inversedBy: votes
+      joinColumns:
+        user_id:
+          referencedColumnName: id
+    site:
+      targetEntity: AppBundle\Entity\Site
+      inversedBy: votes
+      joinColumns:
+        site_id:
+          referencedColumnName: sit_id
+    classement:
+      targetEntity: AppBundle\Entity\Classement
+      inversedBy: votes
+      joinColumns:
+        classement_id:
+          referencedColumnName: cla_id
+  indexes:
+    i1_vote:
+      columns: [vot_creation,classement_id,site_id]
+    i2_vote:
+      columns: [user_id,site_id,vot_creation]
+  lifecycleCallbacks:
+    prePersist: [setCreatedValue]

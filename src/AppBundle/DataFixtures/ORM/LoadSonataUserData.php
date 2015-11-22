@@ -70,7 +70,7 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
             $userManager = $this->container->get('fos_user.user_manager');
             $birth = date_create('1985-10-10');
             $oneDay = new \DateInterval('P1D');
-            $members[] = array();
+            $members = array();
             $administrators = array();
             $superAdmins = array();
 

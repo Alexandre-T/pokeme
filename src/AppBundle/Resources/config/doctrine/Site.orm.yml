@@ -1,0 +1,102 @@
+AppBundle\Entity\Site:
+  type: entity
+  table: te_site_sit
+  id:
+    id:
+      type: integer
+      column: sit_id
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+        comment: Identifiant du site
+  fields:
+    name:
+      type: string
+      length: 64
+      nullable: true
+      column: sit_libelle
+      options:
+        comment: Titre du site
+    description:
+      type: text
+      length: 16777215
+      nullable: true
+      column: sit_description
+      options:
+        comment: Description du site
+    status:
+      type: smallint
+      nullable: false
+      column: sit_statut
+      options:
+        default: 2
+        comment: Statut du site (refusé, en attente, accepté, tricheur)
+    reason:
+      type: text
+      length: 65535
+      nullable: true
+      column: sit_raison
+      options:
+        comment: Explication de la décision
+    url:
+      type: string
+      unique: true
+      length: 255
+      nullable: true
+      column: sit_url
+      options:
+        comment: Url officiel du site
+    created:
+      type: datetime
+      nullable: false
+      column: new_creation
+      options:
+        comment: Creation date
+    updated:
+      type: datetime
+      nullable: true
+      column: new_update
+      options:
+        comment: Update date
+    validated:
+      type: datetime
+      nullable: true
+      column: new_validation
+      options:
+        comment: Date de décision du site
+  indexes:
+    i1_site:
+      columns: [sit_libelle, sit_statut]
+  lifecycleCallbacks:
+    prePersist: [setCreatedValue]
+    preUpdate: [setUpdatedValue]
+  oneToMany:
+    votes:
+      targetEntity: AppBundle\Entity\Vote
+      mappedBy: site
+  manyToOne:
+    owner:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      inversedBy: ownedSites
+      joinColumns:
+        owner_id:
+          referencedColumnName: id
+    validator:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      inversedBy: validatedSites
+      joinColumns:
+        owner_id:
+          referencedColumnName: id
+  manyToMany:
+    classements:
+      targetEntity: AppBundle\Entity\Classement
+      inversedBy: sites
+      joinTable:
+        name: tj_classement_site_cls
+        joinColumns:
+          site_id:
+            referencedColumnName: sit_id
+        inverseJoinColumns:
+          classement_id:
+            referencedColumnName: cla_id

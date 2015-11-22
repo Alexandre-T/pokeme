@@ -14,9 +14,6 @@ fos_user:
 sonata_user:
     security_acl: false
     manager_type: orm # can be orm or mongodb
-    class:
-        user:         Application\Sonata\UserBundle\Entity\User
-        group:        Application\Sonata\UserBundle\Entity\Group
     table:
         user_group: "tj_usergroup_usg"
     profile:  # Profile Form (firstname, lastname, etc ...)

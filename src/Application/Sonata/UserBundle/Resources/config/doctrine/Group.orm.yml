@@ -1,0 +1,13 @@
+Application\Sonata\UserBundle\Entity\Group:
+  type: entity
+  table: te_group_grp
+  repositoryClass: Application\Sonata\UserBundle\Entity\Repository\GroupRepository
+  id:
+    id:
+      type: integer
+      column: id
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+        comment: Identifiant du groupe

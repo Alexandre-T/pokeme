@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Application\Sonata\UserBundle\Entity\Group" table="te_group_grp" repository-class="Application\Sonata\UserBundle\Entity\Repository\GroupRepository">
-        <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-        </id>
-    </entity>
-</doctrine-mapping>

@@ -1,0 +1,29 @@
+Application\Sonata\UserBundle\Entity\User:
+  type: entity
+  table: te_user_usr
+  repositoryClass: Application\Sonata\UserBundle\Entity\Repository\UserRepository
+  id:
+    id:
+      type: integer
+      column: id
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+        comment: Identifiant de l utilisateur
+  oneToMany:
+    ownedClassements:
+      targetEntity: AppBundle\Entity\Classement
+      mappedBy: owner
+    validatedClassements:
+      targetEntity: AppBundle\Entity\Classement
+      mappedBy: validator
+    ownedSites:
+      targetEntity: AppBundle\Entity\Site
+      mappedBy: owner
+    validatedSites:
+      targetEntity: AppBundle\Entity\Site
+      mappedBy: validator
+    votes:
+      targetEntity: AppBundle\Entity\Vote
+      mappedBy: user

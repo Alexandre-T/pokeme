@@ -89,6 +89,7 @@ doctrine:
                     ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
                     FOSUserBundle: ~
+                    AppBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

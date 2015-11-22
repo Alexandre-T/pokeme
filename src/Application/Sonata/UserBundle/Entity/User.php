@@ -16,6 +16,9 @@
  */
 namespace Application\Sonata\UserBundle\Entity;
 
+use AppBundle\Entity\Classement;
+use AppBundle\Entity\Site;
+use AppBundle\Entity\Vote;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -44,6 +47,31 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ownedClassements;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $validatedClassements;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $ownedSites;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $validatedSites;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $votes;
+
+    /**
      * Get id.
      *
      * @return int $id
@@ -51,5 +79,175 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add owned classement.
+     *
+     * @param Classement $ownedClassement
+     *
+     * @return User
+     */
+    public function addOwnedClassement(Classement $ownedClassement)
+    {
+        $this->ownedClassements[] = $ownedClassement;
+
+        return $this;
+    }
+
+    /**
+     * Remove owned classement.
+     *
+     * @param Classement $ownedClassement
+     */
+    public function removeOwnedClassement(Classement $ownedClassement)
+    {
+        $this->ownedClassements->removeElement($ownedClassement);
+    }
+
+    /**
+     * Get owned classements.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOwnedClassements()
+    {
+        return $this->ownedClassements;
+    }
+
+    /**
+     * Add validated classement.
+     *
+     * @param Classement $validatedClassement
+     *
+     * @return User
+     */
+    public function addValidatedClassement(Classement $validatedClassement)
+    {
+        $this->validatedClassements[] = $validatedClassement;
+
+        return $this;
+    }
+
+    /**
+     * Remove validated classement.
+     *
+     * @param Classement $validatedClassement
+     */
+    public function removeValidatedClassement(Classement $validatedClassement)
+    {
+        $this->validatedClassements->removeElement($validatedClassement);
+    }
+
+    /**
+     * Get validated classements.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getValidatedClassements()
+    {
+        return $this->validatedClassements;
+    }
+
+    /**
+     * Add owned site.
+     *
+     * @param Site $ownedSite
+     *
+     * @return User
+     */
+    public function addOwnedSite(Site $ownedSite)
+    {
+        $this->ownedSites[] = $ownedSite;
+
+        return $this;
+    }
+
+    /**
+     * Remove owned site.
+     *
+     * @param Site $ownedSite
+     */
+    public function removeOwnedSite(Site $ownedSite)
+    {
+        $this->ownedSites->removeElement($ownedSite);
+    }
+
+    /**
+     * Get owned sites.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOwnedSites()
+    {
+        return $this->ownedSites;
+    }
+
+    /**
+     * Add validated site.
+     *
+     * @param Site $validatedSite
+     *
+     * @return User
+     */
+    public function addValidatedSite(Site $validatedSite)
+    {
+        $this->validatedSites[] = $validatedSite;
+
+        return $this;
+    }
+
+    /**
+     * Remove validated site.
+     *
+     * @param Site $validatedSite
+     */
+    public function removeValidatedSite(Site $validatedSite)
+    {
+        $this->validatedSites->removeElement($validatedSite);
+    }
+
+    /**
+     * Get validated sites.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getValidatedSites()
+    {
+        return $this->validatedSites;
+    }
+
+    /**
+     * Add vote.
+     *
+     * @param Vote $vote
+     *
+     * @return User
+     */
+    public function addVote(Vote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote.
+     *
+     * @param Vote $vote
+     */
+    public function removeVote(Vote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }
