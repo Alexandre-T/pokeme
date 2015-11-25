@@ -30,7 +30,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Site extends AbstractOwned
 {
-
     /**
      * @var ArrayCollection
      */
@@ -39,7 +38,12 @@ class Site extends AbstractOwned
     /**
      * @var ArrayCollection
      */
-    private $classements;
+    private $annuaires;
+
+    /**
+     * @var Validation
+     */
+    private $validation;
 
     /**
      * Constructor.
@@ -47,7 +51,32 @@ class Site extends AbstractOwned
     public function __construct()
     {
         $this->votes = new ArrayCollection();
-        $this->classements = new ArrayCollection();
+        $this->annuaires = new ArrayCollection();
+        $this->validation = new Validation();
+    }
+
+    /**
+     * Getter Validation.
+     *
+     * @return Validation
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set Validation.
+     *
+     * @param Validation $validation
+     *
+     * @return Annuaire
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
     }
 
     /**
@@ -85,37 +114,36 @@ class Site extends AbstractOwned
     }
 
     /**
-     * Add classement.
+     * Add annuaire.
      *
-     * @param Classement $classement
+     * @param Annuaire $annuaire
      *
      * @return Site
      */
-    public function addClassement(Classement $classement)
+    public function addAnnuaire(Annuaire $annuaire)
     {
-        $this->classements[] = $classement;
+        $this->annuaires[] = $annuaire;
 
         return $this;
     }
 
     /**
-     * Remove classement.
+     * Remove annuaire.
      *
-     * @param Classement $classement
+     * @param Annuaire $annuaire
      */
-    public function removeClassement(Classement $classement)
+    public function removeAnnuaire(Annuaire $annuaire)
     {
-        $this->classements->removeElement($classement);
+        $this->annuaires->removeElement($annuaire);
     }
 
     /**
-     * Get classements.
+     * Get annuaires.
      *
      * @return ArrayCollection
      */
-    public function getClassements()
+    public function getAnnuaires()
     {
-        return $this->classements;
+        return $this->annuaires;
     }
-
 }

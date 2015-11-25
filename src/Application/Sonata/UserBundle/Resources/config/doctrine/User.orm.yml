@@ -12,18 +12,12 @@ Application\Sonata\UserBundle\Entity\User:
         unsigned: true
         comment: Identifiant de l utilisateur
   oneToMany:
-    ownedClassements:
-      targetEntity: AppBundle\Entity\Classement
+    ownedAnnuaires:
+      targetEntity: AppBundle\Entity\Annuaire
       mappedBy: owner
-    validatedClassements:
-      targetEntity: AppBundle\Entity\Classement
-      mappedBy: validator
     ownedSites:
       targetEntity: AppBundle\Entity\Site
       mappedBy: owner
-    validatedSites:
-      targetEntity: AppBundle\Entity\Site
-      mappedBy: validator
     votes:
       targetEntity: AppBundle\Entity\Vote
       mappedBy: user

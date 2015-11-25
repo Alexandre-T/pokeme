@@ -19,7 +19,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Classement Entity.
+ * Annuaire Entity.
  *
  * @category Entity
  *
@@ -28,9 +28,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class Classement extends AbstractOwned
+class Annuaire extends AbstractOwned
 {
-
     /**
      * @var ArrayCollection
      */
@@ -42,12 +41,42 @@ class Classement extends AbstractOwned
     private $sites;
 
     /**
+     * @var Validation
+     */
+    private $validation;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->votes = new ArrayCollection();
         $this->sites = new ArrayCollection();
+        $this->validation = new Validation();
+    }
+
+    /**
+     * Getter Validation.
+     *
+     * @return Validation
+     */
+    public function getValidation()
+    {
+        return $this->validation;
+    }
+
+    /**
+     * Set Validation.
+     *
+     * @param Validation $validation
+     *
+     * @return Annuaire
+     */
+    public function setValidation($validation)
+    {
+        $this->validation = $validation;
+
+        return $this;
     }
 
     /**
@@ -55,7 +84,7 @@ class Classement extends AbstractOwned
      *
      * @param Vote $vote
      *
-     * @return Classement
+     * @return Annuaire
      */
     public function addVote(Vote $vote)
     {
@@ -89,7 +118,7 @@ class Classement extends AbstractOwned
      *
      * @param Site $site
      *
-     * @return Classement
+     * @return Annuaire
      */
     public function addSite(Site $site)
     {
@@ -117,5 +146,4 @@ class Classement extends AbstractOwned
     {
         return $this->sites;
     }
-
 }

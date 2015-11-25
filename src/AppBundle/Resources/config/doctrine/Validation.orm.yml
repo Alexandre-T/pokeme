@@ -1,0 +1,48 @@
+AppBundle\Entity\Validation:
+  type: entity
+  table: te_validation_val
+  id:
+    id:
+      type: integer
+      column: val_id
+      generator:
+        strategy: AUTO
+      options:
+        unsigned: true
+        comment: Identifiant de la validation
+  fields:
+    reason:
+      type: text
+      length: 65535
+      nullable: true
+      column: sit_raison
+      options:
+        comment: Explication de la décision
+    status:
+      type: smallint
+      nullable: false
+      column: cla_statut
+      options:
+        default: 2
+        comment: Statut de l entité validée (refusé, en attente, accepté)
+    created:
+      type: datetime
+      nullable: false
+      column: new_creation
+      options:
+        comment: Creation date
+    updated:
+      type: datetime
+      nullable: true
+      column: new_update
+      options:
+        comment: Update date
+  manyToOne:
+    validator:
+      targetEntity: Application\Sonata\UserBundle\Entity\User
+      joinColumns:
+        validator_id:
+          referencedColumnName: id
+  lifecycleCallbacks:
+    prePersist: [setCreatedValue]
+    preUpdate: [setUpdatedValue]

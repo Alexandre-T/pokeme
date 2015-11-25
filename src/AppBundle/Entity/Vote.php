@@ -16,6 +16,7 @@
  */
 namespace AppBundle\Entity;
 
+use AppBundle\Model\HorodateInterface;
 use Application\Sonata\UserBundle\Entity\User;
 
 /**
@@ -28,7 +29,7 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class Vote
+class Vote extends AbstractEntity implements HorodateInterface
 {
     /**
      * @var int
@@ -36,14 +37,9 @@ class Vote
     private $id;
 
     /**
-     * @var \DateTime
+     * @var Annuaire
      */
-    private $created;
-
-    /**
-     * @var Classement
-     */
-    private $classement;
+    private $annuaire;
 
     /**
      * @var int
@@ -73,30 +69,6 @@ class Vote
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Vote
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created.
-     *
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
     }
 
     /**
@@ -148,41 +120,27 @@ class Vote
     }
 
     /**
-     * Set classement.
+     * Set annuaire.
      *
-     * @param Classement $classement
+     * @param Annuaire $annuaire
      *
      * @return Vote
      */
-    public function setClassement(Classement $classement = null)
+    public function setAnnuaire(Annuaire $annuaire = null)
     {
-        $this->classement = $classement;
+        $this->annuaire = $annuaire;
 
         return $this;
     }
 
     /**
-     * Get classement.
+     * Get annuaire.
      *
-     * @return Classement
+     * @return Annuaire
      */
-    public function getClassement()
+    public function getAnnuaire()
     {
-        return $this->classement;
-    }
-
-    /**
-     * Initialize Creation Date.
-     *
-     * @return Site
-     */
-    public function setCreatedValue()
-    {
-        if (!$this->getCreated()) {
-            $this->created = new \DateTime();
-        }
-
-        return $this;
+        return $this->annuaire;
     }
 
     /**

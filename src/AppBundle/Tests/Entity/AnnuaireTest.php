@@ -24,7 +24,7 @@ use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Entity Site Class Tests.
+ * Entity Annuaire Class Tests.
  *
  * @category Testing
  *
@@ -33,8 +33,9 @@ use Doctrine\Common\Collections\Collection;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class SiteTest extends AbstractEntityTest
+class AnnuaireTest extends AbstractEntityTest
 {
+
     /**
      * Prepares the environment before running a test.
      */
@@ -42,7 +43,7 @@ class SiteTest extends AbstractEntityTest
     {
         parent::setUp();
 
-        $this->object = new Site();
+        $this->object = new Annuaire();
     }
 
     /**
@@ -64,26 +65,26 @@ class SiteTest extends AbstractEntityTest
     }
 
     /**
-     * Test User->__construct().
+     * Test Annuaire->__construct().
      */
     public function testConstruct()
     {
-        $this->assertNull($this->object->getCreated());
-        $this->assertTrue($this->object->getAnnuaires() instanceof Collection);
-        $this->assertEquals(0, $this->object->getAnnuaires()->count());
-        $this->assertNull($this->object->getDescription());
         $this->assertNull($this->object->getId());
+        $this->assertNull($this->object->getCreated());
+        $this->assertNull($this->object->getDescription());
         $this->assertNull($this->object->getName());
         $this->assertNull($this->object->getOwner());
         $this->assertNull($this->object->getUpdated());
         $this->assertNull($this->object->getUrl());
         $this->assertInstanceOf('AppBundle\Entity\Validation', $this->object->getValidation());
-        $this->assertTrue($this->object->getVotes() instanceof Collection);
+        $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $this->object->getSites());
+        $this->assertEquals(0, $this->object->getSites()->count());
+        $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $this->object->getVotes());
         $this->assertEquals(0, $this->object->getVotes()->count());
     }
 
     /**
-     * Tests Site->addVote() testRemoveVote() testGetVotes().
+     * Tests User->addVote() testRemoveVote() testGetVotes().
      */
     public function testAddVote()
     {
@@ -120,53 +121,43 @@ class SiteTest extends AbstractEntityTest
     }
 
     /**
-     * Tests Site->addAnnuaire() User->removeAnnuaire() User->getAnnuaires().
+     * Tests User->addSite() User->removeSite() User->getSites().
      */
-    public function testAddAnnuaire()
+    public function testAddSite()
     {
-        $annuaires[0] = new Annuaire();
-        $annuaires[1] = new Annuaire();
-        $annuaires[2] = new Annuaire();
-        $this->assertTrue($this->object->getAnnuaires() instanceof Collection);
-        $this->assertEquals(0, $this->object->getAnnuaires()->count());
+        $sites[0] = new Site();
+        $sites[1] = new Site();
+        $sites[2] = new Site();
+        $this->assertTrue($this->object->getSites() instanceof Collection);
+        $this->assertEquals(0, $this->object->getSites()->count());
 
-        $this->object->addAnnuaire($annuaires[0]);
-        $this->assertEquals(1, $this->object->getAnnuaires()->count());
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[0]));
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[1]));
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[2]));
+        $this->object->addSite($sites[0]);
+        $this->assertEquals(1, $this->object->getSites()->count());
+        $this->assertTrue($this->object->getSites()->contains($sites[0]));
+        $this->assertFalse($this->object->getSites()->contains($sites[1]));
+        $this->assertFalse($this->object->getSites()->contains($sites[2]));
 
-        $this->object->addAnnuaire($annuaires[1]);
-        $this->assertEquals(2, $this->object->getAnnuaires()->count());
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[0]));
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[1]));
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[2]));
+        $this->object->addSite($sites[1]);
+        $this->assertEquals(2, $this->object->getSites()->count());
+        $this->assertTrue($this->object->getSites()->contains($sites[0]));
+        $this->assertTrue($this->object->getSites()->contains($sites[1]));
+        $this->assertFalse($this->object->getSites()->contains($sites[2]));
 
-        $this->object->removeAnnuaire($annuaires[2]);
-        $this->assertEquals(2, $this->object->getAnnuaires()->count());
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[0]));
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[1]));
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[2]));
+        $this->object->removeSite($sites[2]);
+        $this->assertEquals(2, $this->object->getSites()->count());
+        $this->assertTrue($this->object->getSites()->contains($sites[0]));
+        $this->assertTrue($this->object->getSites()->contains($sites[1]));
+        $this->assertFalse($this->object->getSites()->contains($sites[2]));
 
-        $this->object->removeAnnuaire($annuaires[0]);
-        $this->assertEquals(1, $this->object->getAnnuaires()->count());
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[0]));
-        $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[1]));
-        $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[2]));
+        $this->object->removeSite($sites[0]);
+        $this->assertEquals(1, $this->object->getSites()->count());
+        $this->assertFalse($this->object->getSites()->contains($sites[0]));
+        $this->assertTrue($this->object->getSites()->contains($sites[1]));
+        $this->assertFalse($this->object->getSites()->contains($sites[2]));
     }
 
     /**
-     * Tests site->setDescription() site->getDescription().
-     */
-    public function testSetDescription()
-    {
-        $description = 'description';
-        $this->object->setDescription($description);
-        $this->assertEquals($description, $this->object->getDescription());
-    }
-
-    /**
-     * Tests site->setName() site->getName().
+     * Tests annuaire->setName() annuaire->getName().
      */
     public function testSetName()
     {
@@ -176,17 +167,17 @@ class SiteTest extends AbstractEntityTest
     }
 
     /**
-     * Tests site->setName() site->getName().
+     * Tests annuaire->setDescription() annuaire->getDescription().
      */
-    public function testSetValidator()
+    public function testSetDescription()
     {
-        $validation = new Validation();
-        $this->object->setValidation($validation);
-        $this->assertEquals($validation, $this->object->getValidation());
+        $description = 'description';
+        $this->object->setDescription($description);
+        $this->assertEquals($description, $this->object->getDescription());
     }
 
     /**
-     * Tests site->setUrl() site->getUrl().
+     * Tests annuaire->setUrl() annuaire->getUrl().
      */
     public function testSetUrl()
     {
@@ -196,12 +187,22 @@ class SiteTest extends AbstractEntityTest
     }
 
     /**
-     * Tests site->setOwner() site->getOwner().
+     * Tests annuaire->setOwner() annuaire->getOwner().
      */
     public function testSetOwner()
     {
         $owner = new User();
         $this->object->setOwner($owner);
         $this->assertEquals($owner, $this->object->getOwner());
+    }
+
+    /**
+     * Tests annuaire->setName() annuaire->getName().
+     */
+    public function testSetValidator()
+    {
+        $validation = new Validation();
+        $this->object->setValidation($validation);
+        $this->assertEquals($validation, $this->object->getValidation());
     }
 }

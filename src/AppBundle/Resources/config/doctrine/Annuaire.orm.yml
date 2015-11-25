@@ -1,82 +1,70 @@
-AppBundle\Entity\Site:
+AppBundle\Entity\Annuaire:
   type: entity
-  table: te_site_sit
+  table: te_annuaire_ann
   id:
     id:
       type: integer
-      column: sit_id
+      column: ann_id
       generator:
         strategy: AUTO
       options:
         unsigned: true
-        comment: Identifiant du site
+        comment: Identifiant de l annuaire
   fields:
     name:
       type: string
       length: 64
-      nullable: true
-      column: sit_libelle
+      nullable: false
+      column: ann_libelle
       options:
-        comment: Titre du site
+        comment: Nom de l annuaire
     description:
       type: text
       length: 16777215
       nullable: true
-      column: sit_description
+      column: ann_description
       options:
-        comment: Description du site
+        comment: Description de l annuaire
     url:
       type: string
-      unique: true
       length: 255
       nullable: true
-      column: sit_url
+      column: ann_url
       options:
-        comment: Url officiel du site
+        comment: Url officiel du site diffusant l annuaire
     created:
       type: datetime
       nullable: false
-      column: new_creation
+      column: ann_creation
       options:
         comment: Creation date
     updated:
       type: datetime
       nullable: true
-      column: new_update
+      column: ann_update
       options:
         comment: Update date
-  indexes:
-    i1_site:
-      columns: [sit_libelle]
   lifecycleCallbacks:
     prePersist: [setCreatedValue]
     preUpdate: [setUpdatedValue]
+  oneToMany:
+    votes:
+      targetEntity: AppBundle\Entity\Vote
+      mappedBy: annuaire
   oneToOne:
     validation:
       targetEntity: AppBundle\Entity\Validation
       joinColumn:
         name: validation_id
         referencedColumnName: val_id
-  oneToMany:
-    votes:
-      targetEntity: AppBundle\Entity\Vote
-      mappedBy: site
   manyToOne:
     owner:
       targetEntity: Application\Sonata\UserBundle\Entity\User
-      inversedBy: ownedSites
+      inversedBy: ownedAnnuaires
       joinColumns:
         owner_id:
           referencedColumnName: id
   manyToMany:
-    annuaires:
-      targetEntity: AppBundle\Entity\Annuaire
-      inversedBy: sites
-      joinTable:
-        name: tj_annuaire_site_ans
-        joinColumns:
-          site_id:
-            referencedColumnName: sit_id
-        inverseJoinColumns:
-          annuaire_id:
-            referencedColumnName: ann_id
+    sites:
+      targetEntity: AppBundle\Entity\Site
+      mappedBy: annuaires

@@ -42,12 +42,12 @@ AppBundle\Entity\Vote:
       joinColumns:
         site_id:
           referencedColumnName: sit_id
-    classement:
-      targetEntity: AppBundle\Entity\Classement
+    annuaire:
+      targetEntity: AppBundle\Entity\Annuaire
       inversedBy: votes
       joinColumns:
         classement_id:
-          referencedColumnName: cla_id
+          referencedColumnName: ann_id
   indexes:
     i1_vote:
       columns: [vot_creation,classement_id,site_id]

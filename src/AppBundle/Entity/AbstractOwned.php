@@ -16,10 +16,12 @@
  */
 namespace AppBundle\Entity;
 
+use AppBundle\Model\DescriptionInterface;
+use AppBundle\Model\HorodateInterface;
 use Application\Sonata\UserBundle\Entity\User;
 
 /**
- * Classement Entity.
+ * AbstractOwned Entity.
  *
  * @category Entity
  *
@@ -28,82 +30,32 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-abstract class AbstractOwned
+abstract class AbstractOwned extends AbstractEntity implements HorodateInterface, DescriptionInterface
 {
     /**
-     * Classement accepté.
-     *
      * @var int
      */
-    const ACCEPTE = 1;
-    /**
-     * Classement mis en attente par défaut.
-     *
-     * @var int
-     */
-    const EN_ATTENTE = 2;
-
-    /**
-     * Classement refusé.
-     *
-     * @var int
-     */
-    const REFUSE = 3;
-
-    /**
-     * @var int
-     */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @var User
      */
-    private $owner;
+    protected $owner;
 
     /**
      * @var string
      */
-    private $reason;
-
-    /**
-     * @var int
-     */
-    private $status = 2;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var \DateTime
-     */
-    private $created;
-
-    /**
-     * @var \DateTime
-     */
-    private $updated;
-
-    /**
-     * @var \DateTime
-     */
-    private $validated;
-
-    /**
-     * @var User
-     */
-    private $validator;
+    protected $url;
 
     /**
      * Get id.
@@ -120,7 +72,7 @@ abstract class AbstractOwned
      *
      * @param string $name
      *
-     * @return Classement
+     * @return AbstractOwned
      */
     public function setName($name)
     {
@@ -144,7 +96,7 @@ abstract class AbstractOwned
      *
      * @param string $description
      *
-     * @return Classement
+     * @return AbstractOwned
      */
     public function setDescription($description)
     {
@@ -168,7 +120,7 @@ abstract class AbstractOwned
      *
      * @param User $owner
      *
-     * @return Classement
+     * @return AbstractOwned
      */
     public function setOwner(User $owner = null)
     {
@@ -188,35 +140,11 @@ abstract class AbstractOwned
     }
 
     /**
-     * Set statut.
-     *
-     * @param int $status
-     *
-     * @return Classement
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get statut.
-     *
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set url.
      *
      * @param string $url
      *
-     * @return Classement
+     * @return AbstractOwned
      */
     public function setUrl($url)
     {
@@ -233,161 +161,5 @@ abstract class AbstractOwned
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set validator.
-     *
-     * @param User $validator
-     *
-     * @return Classement
-     */
-    public function setValidator(User $validator = null)
-    {
-        $this->validator = $validator;
-
-        return $this;
-    }
-
-    /**
-     * Get validator.
-     *
-     * @return User
-     */
-    public function getValidator()
-    {
-        return $this->validator;
-    }
-
-    /**
-     * Set raison.
-     *
-     * @param string $reason
-     *
-     * @return Site
-     */
-    public function setReason($reason)
-    {
-        $this->reason = $reason;
-
-        return $this;
-    }
-
-    /**
-     * Get raison.
-     *
-     * @return string
-     */
-    public function getReason()
-    {
-        return $this->reason;
-    }
-
-    /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Classement
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created.
-     *
-     * @return \DateTime
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set updated.
-     *
-     * @param \DateTime $updated
-     *
-     * @return Classement
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
-     * Get updated.
-     *
-     * @return \DateTime
-     */
-    public function getUpdated()
-    {
-        return $this->updated;
-    }
-
-    /**
-     * Set validated.
-     *
-     * @param \DateTime $validated
-     *
-     * @return Classement
-     */
-    public function setValidated($validated)
-    {
-        $this->validated = $validated;
-
-        return $this;
-    }
-
-    /**
-     * Get validated.
-     *
-     * @return \DateTime
-     */
-    public function getValidated()
-    {
-        return $this->validated;
-    }
-
-    /**
-     * Is validated.
-     *
-     * @return bool
-     */
-    public function isValidated()
-    {
-        return !is_null($this->validated);
-    }
-
-    /**
-     * Initialize Creation Date.
-     *
-     * @return Classement
-     */
-    public function setCreatedValue()
-    {
-        if (!$this->getCreated()) {
-            $this->created = new \DateTime();
-        }
-
-        return $this;
-    }
-
-    /**
-     * Update Updated Date.
-     *
-     * @return Classement
-     */
-    public function setUpdatedValue()
-    {
-        $this->updated = new \DateTime();
-
-        return $this;
     }
 }

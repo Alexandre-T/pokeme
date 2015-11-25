@@ -16,9 +16,11 @@
  */
 namespace Application\Sonata\UserBundle\Entity;
 
-use AppBundle\Entity\Classement;
+use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Site;
+use AppBundle\Entity\Validation;
 use AppBundle\Entity\Vote;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
@@ -47,29 +49,30 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var ArrayCollection
      */
-    private $ownedClassements;
+    private $ownedAnnuaires;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $validatedClassements;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var ArrayCollection
      */
     private $ownedSites;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $validatedSites;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var ArrayCollection
      */
     private $votes;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->ownedAnnuaires = new ArrayCollection();
+        $this->ownedSites = new ArrayCollection();
+        $this->votes = new Validation();
+    }
 
     /**
      * Get id.
@@ -82,71 +85,37 @@ class User extends BaseUser
     }
 
     /**
-     * Add owned classement.
+     * Add owned annuaire.
      *
-     * @param Classement $ownedClassement
+     * @param Annuaire $ownedAnnuaire
      *
      * @return User
      */
-    public function addOwnedClassement(Classement $ownedClassement)
+    public function addOwnedAnnuaire(Annuaire $ownedAnnuaire)
     {
-        $this->ownedClassements[] = $ownedClassement;
+        $this->ownedAnnuaires[] = $ownedAnnuaire;
 
         return $this;
     }
 
     /**
-     * Remove owned classement.
+     * Remove owned annuaire.
      *
-     * @param Classement $ownedClassement
+     * @param Annuaire $ownedAnnuaire
      */
-    public function removeOwnedClassement(Classement $ownedClassement)
+    public function removeOwnedAnnuaire(Annuaire $ownedAnnuaire)
     {
-        $this->ownedClassements->removeElement($ownedClassement);
+        $this->ownedAnnuaires->removeElement($ownedAnnuaire);
     }
 
     /**
-     * Get owned classements.
+     * Get owned annuaires.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOwnedClassements()
+    public function getOwnedAnnuaires()
     {
-        return $this->ownedClassements;
-    }
-
-    /**
-     * Add validated classement.
-     *
-     * @param Classement $validatedClassement
-     *
-     * @return User
-     */
-    public function addValidatedClassement(Classement $validatedClassement)
-    {
-        $this->validatedClassements[] = $validatedClassement;
-
-        return $this;
-    }
-
-    /**
-     * Remove validated classement.
-     *
-     * @param Classement $validatedClassement
-     */
-    public function removeValidatedClassement(Classement $validatedClassement)
-    {
-        $this->validatedClassements->removeElement($validatedClassement);
-    }
-
-    /**
-     * Get validated classements.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getValidatedClassements()
-    {
-        return $this->validatedClassements;
+        return $this->ownedAnnuaires;
     }
 
     /**
@@ -181,40 +150,6 @@ class User extends BaseUser
     public function getOwnedSites()
     {
         return $this->ownedSites;
-    }
-
-    /**
-     * Add validated site.
-     *
-     * @param Site $validatedSite
-     *
-     * @return User
-     */
-    public function addValidatedSite(Site $validatedSite)
-    {
-        $this->validatedSites[] = $validatedSite;
-
-        return $this;
-    }
-
-    /**
-     * Remove validated site.
-     *
-     * @param Site $validatedSite
-     */
-    public function removeValidatedSite(Site $validatedSite)
-    {
-        $this->validatedSites->removeElement($validatedSite);
-    }
-
-    /**
-     * Get validated sites.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getValidatedSites()
-    {
-        return $this->validatedSites;
     }
 
     /**

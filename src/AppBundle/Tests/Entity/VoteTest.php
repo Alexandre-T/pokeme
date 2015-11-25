@@ -16,7 +16,7 @@
  */
 namespace AppBundle\Tests\Entity;
 
-use AppBundle\Entity\Classement;
+use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Site;
 use AppBundle\Entity\Vote;
 use Application\Sonata\UserBundle\Entity\User;
@@ -73,7 +73,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $this->assertNull($this->vote->getClassement());
+        $this->assertNull($this->vote->getAnnuaire());
         $this->assertNull($this->vote->getCreated());
         $this->assertNull($this->vote->getId());
         $this->assertNull($this->vote->getIp());
@@ -83,13 +83,13 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setClassement() Vote->getClassement().
+     * Tests Vote->setAnnuaire() Vote->getAnnuaire().
      */
-    public function testSetClassement()
+    public function testSetAnnuaire()
     {
-        $classement = new Classement();
-        $this->vote->setClassement($classement);
-        $this->assertEquals($classement, $this->vote->getClassement());
+        $annuaire = new Annuaire();
+        $this->vote->setAnnuaire($annuaire);
+        $this->assertEquals($annuaire, $this->vote->getAnnuaire());
     }
 
     /**
@@ -133,7 +133,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Classement->setCreated() Classement->getCreated().
+     * Tests Annuaire->setCreated() Annuaire->getCreated().
      */
     public function testSetCreated()
     {
@@ -143,7 +143,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Classement->setCreatedValue().
+     * Tests Annuaire->setCreatedValue().
      */
     public function testSetCreatedValue()
     {
