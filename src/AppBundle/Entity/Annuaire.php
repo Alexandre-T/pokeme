@@ -17,6 +17,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\ClassificationBundle\Model\Tag;
 
 /**
  * Annuaire Entity.
@@ -41,6 +42,11 @@ class Annuaire extends AbstractOwned
     private $sites;
 
     /**
+     * @var ArrayCollection
+     */
+    private $tags;
+
+    /**
      * @var Validation
      */
     private $validation;
@@ -52,6 +58,7 @@ class Annuaire extends AbstractOwned
     {
         $this->votes = new ArrayCollection();
         $this->sites = new ArrayCollection();
+        $this->tags = new ArrayCollection();
         $this->validation = new Validation();
     }
 
@@ -145,5 +152,39 @@ class Annuaire extends AbstractOwned
     public function getSites()
     {
         return $this->sites;
+    }
+
+    /**
+     * Add tag.
+     *
+     * @param Tag $tag
+     *
+     * @return Site
+     */
+    public function addTag(Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag.
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags.
+     *
+     * @return ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

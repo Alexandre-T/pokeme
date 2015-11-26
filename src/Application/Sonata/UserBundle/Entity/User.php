@@ -18,7 +18,6 @@ namespace Application\Sonata\UserBundle\Entity;
 
 use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Site;
-use AppBundle\Entity\Validation;
 use AppBundle\Entity\Vote;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
@@ -71,7 +70,7 @@ class User extends BaseUser
         parent::__construct();
         $this->ownedAnnuaires = new ArrayCollection();
         $this->ownedSites = new ArrayCollection();
-        $this->votes = new Validation();
+        $this->votes = new ArrayCollection();
     }
 
     /**

@@ -10,3 +10,10 @@ Application\Sonata\ClassificationBundle\Entity\Tag:
 #        unsigned: true
       generator:
         strategy: AUTO
+  manyToMany:
+    sites:
+      targetEntity: AppBundle\Entity\Site
+      mappedBy: tags
+    annuaires:
+      targetEntity: AppBundle\Entity\Annuaire
+      mappedBy: tags

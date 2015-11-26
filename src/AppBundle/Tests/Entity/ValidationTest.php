@@ -72,7 +72,6 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validation->isEnabled());
         $this->assertTrue($this->validation->isWaiting());
         $this->assertFalse($this->validation->isRejected());
-
     }
 
     /**

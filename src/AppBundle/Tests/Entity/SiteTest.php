@@ -20,6 +20,7 @@ use AppBundle\Entity\Site;
 use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Validation;
 use AppBundle\Entity\Vote;
+use Application\Sonata\ClassificationBundle\Entity\Tag;
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 
@@ -153,6 +154,42 @@ class SiteTest extends AbstractEntityTest
         $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[0]));
         $this->assertTrue($this->object->getAnnuaires()->contains($annuaires[1]));
         $this->assertFalse($this->object->getAnnuaires()->contains($annuaires[2]));
+    }
+
+    /**
+     * Tests Site->addTag() Annuaire->removeTag() Annuaire->getTags().
+     */
+    public function testAddTag()
+    {
+        $tags[0] = new Tag();
+        $tags[1] = new Tag();
+        $tags[2] = new Tag();
+        $this->assertTrue($this->object->getTags() instanceof Collection);
+        $this->assertEquals(0, $this->object->getTags()->count());
+
+        $this->object->addTag($tags[0]);
+        $this->assertEquals(1, $this->object->getTags()->count());
+        $this->assertTrue($this->object->getTags()->contains($tags[0]));
+        $this->assertFalse($this->object->getTags()->contains($tags[1]));
+        $this->assertFalse($this->object->getTags()->contains($tags[2]));
+
+        $this->object->addTag($tags[1]);
+        $this->assertEquals(2, $this->object->getTags()->count());
+        $this->assertTrue($this->object->getTags()->contains($tags[0]));
+        $this->assertTrue($this->object->getTags()->contains($tags[1]));
+        $this->assertFalse($this->object->getTags()->contains($tags[2]));
+
+        $this->object->removeTag($tags[2]);
+        $this->assertEquals(2, $this->object->getTags()->count());
+        $this->assertTrue($this->object->getTags()->contains($tags[0]));
+        $this->assertTrue($this->object->getTags()->contains($tags[1]));
+        $this->assertFalse($this->object->getTags()->contains($tags[2]));
+
+        $this->object->removeTag($tags[0]);
+        $this->assertEquals(1, $this->object->getTags()->count());
+        $this->assertFalse($this->object->getTags()->contains($tags[0]));
+        $this->assertTrue($this->object->getTags()->contains($tags[1]));
+        $this->assertFalse($this->object->getTags()->contains($tags[2]));
     }
 
     /**

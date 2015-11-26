@@ -70,83 +70,64 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
             $userManager = $this->container->get('fos_user.user_manager');
             $birth = date_create('1985-10-10');
             $oneDay = new \DateInterval('P1D');
-            $members = array();
-            $administrators = array();
-            $superAdmins = array();
 
             //Members creation
             for ($index = 1; $index < self::MEMBERS; ++$index) {
                 /*
                  * @var \Application\Sonata\UserBundle\Entity\User
                  */
-                $members[$index] = $userManager->createUser();
-                $members[$index]->setEmail("membre$index@example.org");
-                $members[$index]->setWebsite("www$index.example.org");
-                $members[$index]->setBiography("Biographie de membre $index");
-                $members[$index]->setDateOfBirth($birth->add($oneDay));
-                $members[$index]->setEnabled((0 != $index % 5));
-                $members[$index]->setLocked((0 == $index % 10));
-                $members[$index]->setLastname("Membre$index");
-                $members[$index]->setFirstname("Membre$index");
-                $members[$index]->setUsername("Membre$index");
-                $encoder = $this->container->get('security.encoder_factory')->getEncoder($members[$index]);
-                $members[$index]->setPassword($encoder->encodePassword('secret', $members[$index]->getSalt()));
-                $members[$index]->addGroup($this->getReference('group-user'));
-                $members[$index]->setLocale('fr_FR');
-                $members[$index]->setTimezone('Europe/Paris');
+                $member = $userManager->createUser();
+                $member->setEmail("membre$index@example.org");
+                $member->setWebsite("www$index.example.org");
+                $member->setBiography("Biographie de membre $index");
+                $member->setDateOfBirth($birth->add($oneDay));
+                $member->setEnabled((0 != $index % 5));
+                $member->setLocked((0 == $index % 10));
+                $member->setLastname("Membre$index");
+                $member->setFirstname("Membre$index");
+                $member->setUsername("Membre$index");
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($member);
+                $member->setPassword($encoder->encodePassword('secret', $member->getSalt()));
+                $member->addGroup($this->getReference('group-user'));
+                $member->setLocale('fr_FR');
+                $member->setTimezone('Europe/Paris');
+                $userManager->updateUser($member);
+                $this->addReference("user-member-$index", $member);
             }
 
             for ($index = self::MEMBERS; $index < self::ADMINISTRATORS; ++$index) {
-                $administrators[$index] = $userManager->createUser();
-                $administrators[$index]->setEmail("administrator$index@example.org");
-                $administrators[$index]->setWebsite("www$index.example.org");
-                $administrators[$index]->setBiography("Biographie de administrator$index");
-                $administrators[$index]->setDateOfBirth($birth->add($oneDay));
-                $administrators[$index]->setEnabled(true);
-                $administrators[$index]->setFirstname("administrator$index");
-                $administrators[$index]->setUsername("administrator$index");
-                $encoder = $this->container->get('security.encoder_factory')->getEncoder($administrators[$index]);
-                $administrators[$index]->setPassword($encoder->encodePassword('secret', $administrators[$index]->getSalt()));
-                $administrators[$index]->addGroup($this->getReference('group-user'));
-                $administrators[$index]->addGroup($this->getReference('group-admin'));
-                $administrators[$index]->setLocale('fr_FR');
-                $administrators[$index]->setTimezone('Europe/Paris');
-            }
-            for ($index = self::ADMINISTRATORS; $index < self::SUPERADMIN; ++$index) {
-                $superAdmins[$index] = $userManager->createUser();
-                $superAdmins[$index]->setEmail("superAdmin$index@example.org");
-                $superAdmins[$index]->setWebsite("www$index.example.org");
-                $superAdmins[$index]->setBiography("Biographie de superAdmin $index");
-                $superAdmins[$index]->setDateOfBirth($birth->add($oneDay));
-                $superAdmins[$index]->setEnabled(true);
-                $superAdmins[$index]->setFirstname("superAdmin$index");
-                $superAdmins[$index]->setUsername("superAdmin$index");
-                $encoder = $this->container->get('security.encoder_factory')->getEncoder($superAdmins[$index]);
-                $superAdmins[$index]->setPassword($encoder->encodePassword('secret', $superAdmins[$index]->getSalt()));
-                $superAdmins[$index]->addGroup($this->getReference('group-super-admin'));
-                $superAdmins[$index]->setLocale('fr_FR');
-                $superAdmins[$index]->setTimezone('Europe/Paris');
-            }
-
-            //Enregistrement des données de tests
-            foreach ($members as $member) {
-                $userManager->updateUser($member);
-            }
-            foreach ($administrators as $administrator) {
+                $administrator = $userManager->createUser();
+                $administrator->setEmail("administrator$index@example.org");
+                $administrator->setWebsite("www$index.example.org");
+                $administrator->setBiography("Biographie de administrator$index");
+                $administrator->setDateOfBirth($birth->add($oneDay));
+                $administrator->setEnabled(true);
+                $administrator->setFirstname("administrator$index");
+                $administrator->setUsername("administrator$index");
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($administrator);
+                $administrator->setPassword($encoder->encodePassword('secret', $administrator->getSalt()));
+                $administrator->addGroup($this->getReference('group-user'));
+                $administrator->addGroup($this->getReference('group-admin'));
+                $administrator->setLocale('fr_FR');
+                $administrator->setTimezone('Europe/Paris');
                 $userManager->updateUser($administrator);
-            }
-            foreach ($superAdmins as $superAdmin) {
-                $userManager->updateUser($superAdmin);
-            }
-
-            //Référencement des données de tests
-            foreach ($members as $index => $member) {
-                $this->addReference("user-member-$index", $member);
-            }
-            foreach ($administrators as $index => $administrator) {
                 $this->addReference("user-administrator-$index", $administrator);
             }
-            foreach ($superAdmins as $index => $superAdmin) {
+            for ($index = self::ADMINISTRATORS; $index < self::SUPERADMIN; ++$index) {
+                $superAdmin = $userManager->createUser();
+                $superAdmin->setEmail("superAdmin$index@example.org");
+                $superAdmin->setWebsite("www$index.example.org");
+                $superAdmin->setBiography("Biographie de superAdmin $index");
+                $superAdmin->setDateOfBirth($birth->add($oneDay));
+                $superAdmin->setEnabled(true);
+                $superAdmin->setFirstname("superAdmin$index");
+                $superAdmin->setUsername("superAdmin$index");
+                $encoder = $this->container->get('security.encoder_factory')->getEncoder($superAdmin);
+                $superAdmin->setPassword($encoder->encodePassword('secret', $superAdmin->getSalt()));
+                $superAdmin->addGroup($this->getReference('group-super-admin'));
+                $superAdmin->setLocale('fr_FR');
+                $superAdmin->setTimezone('Europe/Paris');
+                $userManager->updateUser($superAdmin);
                 $this->addReference("user-super-admin-$index", $superAdmin);
             }
         }

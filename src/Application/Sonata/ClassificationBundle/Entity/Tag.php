@@ -16,6 +16,9 @@
  */
 namespace Application\Sonata\ClassificationBundle\Entity;
 
+use AppBundle\Entity\Annuaire;
+use AppBundle\Entity\Site;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Entity\BaseTag as BaseTag;
 
 /**
@@ -39,6 +42,26 @@ class Tag extends BaseTag
      * @var int
      */
     protected $id;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $annuaires;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $sites;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->sites = new ArrayCollection();
+        $this->annuaires = new ArrayCollection();
+    }
+
     /**
      * Get id.
      *
@@ -47,5 +70,73 @@ class Tag extends BaseTag
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add annuaire.
+     *
+     * @param Annuaire $annuaire
+     *
+     * @return Tag
+     */
+    public function addAnnuaire(Annuaire $annuaire)
+    {
+        $this->annuaires[] = $annuaire;
+
+        return $this;
+    }
+
+    /**
+     * Remove annuaire.
+     *
+     * @param Annuaire $annuaire
+     */
+    public function removeAnnuaire(Annuaire $annuaire)
+    {
+        $this->annuaires->removeElement($annuaire);
+    }
+
+    /**
+     * Get annuaires.
+     *
+     * @return ArrayCollection
+     */
+    public function getAnnuaires()
+    {
+        return $this->annuaires;
+    }
+
+    /**
+     * Add site.
+     *
+     * @param Site $site
+     *
+     * @return Tag
+     */
+    public function addSite(Site $site)
+    {
+        $this->sites[] = $site;
+
+        return $this;
+    }
+
+    /**
+     * Remove site.
+     *
+     * @param Site $site
+     */
+    public function removeSite(Site $site)
+    {
+        $this->sites->removeElement($site);
+    }
+
+    /**
+     * Get sites.
+     *
+     * @return ArrayCollection
+     */
+    public function getSites()
+    {
+        return $this->sites;
     }
 }

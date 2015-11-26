@@ -80,3 +80,14 @@ AppBundle\Entity\Site:
         inverseJoinColumns:
           annuaire_id:
             referencedColumnName: ann_id
+    tags:
+      targetEntity: Application\Sonata\ClassificationBundle\Entity\Tag
+      inversedBy: sites
+      joinTable:
+        name: tj_site_tag_sta
+        joinColumns:
+          site_id:
+            referencedColumnName: sit_id
+        inverseJoinColumns:
+          tag_id:
+            referencedColumnName: id
