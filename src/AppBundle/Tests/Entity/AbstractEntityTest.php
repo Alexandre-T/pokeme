@@ -56,7 +56,7 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Annuaire->setCreated() Annuaire->getCreated().
+     * Tests AbstractEntity->setCreated() AbstractEntity->getCreated().
      */
     public function testSetCreated()
     {
@@ -66,7 +66,7 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Annuaire->setUpdated() Annuaire->getUpdated().
+     * Tests AbstractEntity->setUpdated() AbstractEntity->getUpdated().
      */
     public function testSetUpdated()
     {
@@ -76,38 +76,28 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Annuaire->setCreatedValue().
+     * Tests AbstractEntity->setIpCreator() AbstractEntity->getIpCreator().
      */
-    public function testSetCreatedValue()
+    public function testSetIpCreator()
     {
-        $this->assertNull($this->object->getCreated());
-        $this->assertEquals($this->object, $this->object->setCreatedValue());
-        $this->assertNotNull($this->object->getCreated());
-        $this->assertTrue($this->object->getCreated() instanceof \DateTime);
-
-        $date = new \DateTime();
-        $date->sub(new \DateInterval('P5Y'));
-        $this->object->setCreated($date);
-        $this->assertEquals($date, $this->object->getCreated());
-        $this->assertEquals($this->object, $this->object->setCreatedValue());
-        $this->assertEquals($date, $this->object->getCreated());
+        $ipV4 = '127.0.0.1';
+        $ipV6 = 'fe80::226:18ff:fef9:2cbe/64';
+        $this->object->setIpCreator($ipV4);
+        $this->assertEquals($ipV4, $this->object->getIpCreator());
+        $this->object->setIpCreator($ipV6);
+        $this->assertEquals($ipV6, $this->object->getIpCreator());
     }
 
     /**
-     * Tests Annuaire->setUpdatedValue().
+     * Tests AbstractEntity->setIpUpdater() AbstractEntity->getIpUpdater().
      */
-    public function testSetUpdatedValue()
+    public function testSetIpUpdater()
     {
-        $this->assertNull($this->object->getUpdated());
-        $this->object->setUpdatedValue();
-        $this->assertNotNull($this->object->getUpdated());
-        $this->assertTrue($this->object->getUpdated() instanceof \DateTime);
-
-        $date = new \DateTime();
-        $date->sub(new \DateInterval('P5Y'));
-        $this->object->setUpdated($date);
-        $this->assertEquals($date, $this->object->getUpdated());
-        $this->object->setUpdatedValue();
-        $this->assertNotEquals($date, $this->object->getUpdated());
+        $ipV4 = '127.0.0.1';
+        $ipV6 = 'fe80::226:18ff:fef9:2cbe/64';
+        $this->object->setIpUpdater($ipV4);
+        $this->assertEquals($ipV4, $this->object->getIpUpdater());
+        $this->object->setIpUpdater($ipV6);
+        $this->assertEquals($ipV6, $this->object->getIpUpdater());
     }
 }

@@ -21,28 +21,31 @@ AppBundle\Entity\Validation:
     status:
       type: smallint
       nullable: false
-      column: cla_statut
+      column: val_status
       options:
         default: 2
         comment: Statut de l entité validée (refusé, en attente, accepté)
     created:
       type: datetime
       nullable: false
-      column: new_creation
+      column: val_creation
       options:
         comment: Creation date
+      gedmo:
+        timestampable:
+          on: create
     updated:
       type: datetime
       nullable: true
-      column: new_update
+      column: val_update
       options:
         comment: Update date
+      gedmo:
+        timestampable:
+          on: update
   manyToOne:
     validator:
       targetEntity: Application\Sonata\UserBundle\Entity\User
       joinColumns:
         validator_id:
           referencedColumnName: id
-  lifecycleCallbacks:
-    prePersist: [setCreatedValue]
-    preUpdate: [setUpdatedValue]

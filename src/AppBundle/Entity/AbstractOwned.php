@@ -17,7 +17,8 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Model\DescriptionInterface;
-use AppBundle\Model\HorodateInterface;
+use AppBundle\Model\IpTraceableInterface;
+use AppBundle\Model\TimestampableInterface;
 use Application\Sonata\UserBundle\Entity\User;
 
 /**
@@ -30,7 +31,10 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-abstract class AbstractOwned extends AbstractEntity implements HorodateInterface, DescriptionInterface
+abstract class AbstractOwned extends AbstractEntity implements
+    IpTraceableInterface,
+    TimestampableInterface,
+    DescriptionInterface
 {
     /**
      * @var int
@@ -56,6 +60,16 @@ abstract class AbstractOwned extends AbstractEntity implements HorodateInterface
      * @var string
      */
     protected $url;
+
+    /**
+     * @var string
+     */
+    protected $slugUrl;
+
+    /**
+     * @var string
+     */
+    protected $slugName;
 
     /**
      * Get id.
@@ -161,5 +175,49 @@ abstract class AbstractOwned extends AbstractEntity implements HorodateInterface
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Get Slug URL without http|https.
+     *
+     * @return string
+     */
+    public function getSlugUrl()
+    {
+        return $this->slugUrl;
+    }
+
+    /**
+     * Get Slug Name.
+     *
+     * @return mixed
+     */
+    public function getSlugName()
+    {
+        return $this->slugName;
+    }
+
+    /**
+     * @param string $slugUrl
+     *
+     * @return DescriptionInterface
+     */
+    public function setSlugUrl($slugUrl)
+    {
+        $this->slugUrl = $slugUrl;
+
+        return $this;
+    }
+
+    /**
+     * @param string $slugName
+     *
+     * @return DescriptionInterface
+     */
+    public function setSlugName($slugName)
+    {
+        $this->slugName = $slugName;
+
+        return $this;
     }
 }

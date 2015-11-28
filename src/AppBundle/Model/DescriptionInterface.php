@@ -75,4 +75,35 @@ interface DescriptionInterface
      * @return string
      */
     public function getUrl();
+
+    /**
+     * Return the URL without http or https Slug.
+     *
+     * @return string
+     */
+    public function getSlugUrl();
+
+    /**
+     * Set the URL Slug.
+     *
+     * @param string
+     *
+     * @return DescriptionInterface
+     */
+    public function setSlugUrl($slugUrl);
+    /**
+     * Get the Name in slug format.
+     *
+     * @param string
+     *
+     * @return DescriptionInterface
+     */
+    public function setSlugName($slugName);
+
+    /**
+     * Set the Name in slug format.
+     *
+     * @return string
+     */
+    public function getSlugName();
 }

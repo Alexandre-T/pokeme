@@ -61,7 +61,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests User->getId().
+     * Tests Vote->getId().
      */
     public function testGetId()
     {
@@ -69,14 +69,13 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test User->__construct().
+     * Test Vote->__construct().
      */
     public function testConstruct()
     {
         $this->assertNull($this->vote->getAnnuaire());
         $this->assertNull($this->vote->getCreated());
         $this->assertNull($this->vote->getId());
-        $this->assertNull($this->vote->getIp());
         $this->assertNull($this->vote->getSite());
         $this->assertNull($this->vote->getTracker());
         $this->assertNull($this->vote->getUser());
@@ -103,16 +102,6 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setIp() Vote->getIp().
-     */
-    public function testSetIp()
-    {
-        $ip = ip2long('127.0.0.1');
-        $this->vote->setIp($ip);
-        $this->assertEquals($ip, $this->vote->getIp());
-    }
-
-    /**
      * Tests Vote->setTracker() Vote->getTracker().
      */
     public function testSetTracker()
@@ -133,7 +122,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Annuaire->setCreated() Annuaire->getCreated().
+     * Tests Vote->setCreated() Vote->getCreated().
      */
     public function testSetCreated()
     {
@@ -143,20 +132,12 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Annuaire->setCreatedValue().
+     * Tests Vote->setPoint() Vote->getPoint().
      */
-    public function testSetCreatedValue()
+    public function testSetPoint()
     {
-        $this->assertNull($this->vote->getCreated());
-        $this->assertInstanceOf('AppBundle\Entity\Vote', $this->vote->setCreatedValue());
-        $this->assertNotNull($this->vote->getCreated());
-        $this->assertTrue($this->vote->getCreated() instanceof \DateTime);
-
-        $date = new \DateTime();
-        $date->sub(new \DateInterval('P5Y'));
-        $this->vote->setCreated($date);
-        $this->assertEquals($date, $this->vote->getCreated());
-        $this->assertInstanceOf('AppBundle\Entity\Vote', $this->vote->setCreatedValue());
-        $this->assertEquals($date, $this->vote->getCreated());
+        $expected = 3;
+        $this->vote->setPoint($expected);
+        $this->assertEquals($expected, $this->vote->getPoint());
     }
 }

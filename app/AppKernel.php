@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            //Stof install DoctrineExtensions
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             //Sensio Bundle
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             // Add Sonata dependencies

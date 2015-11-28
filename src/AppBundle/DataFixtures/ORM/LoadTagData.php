@@ -16,6 +16,7 @@
  */
 namespace AppBundle\DataFixtures\ORM;
 
+use Application\Sonata\ClassificationBundle\Entity\Context;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -44,15 +45,17 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
     {
 
         //Dictionary Cooking
-        $mots = 'érotique,fantastique,contemporain,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
+        $mots = 'érotique,fantastique,contemporain,historique,futuriste,apocalyptique,avatars réels,avatar manga,city,université';
         $mots .= ',harry potter,ange,démon,vampire,lycanthrope';
         $mots = explode(',', $mots);
         natsort($mots);
+        /** @var Context $context */
+        $context = $this->getReference('site-context');
 
         foreach ($mots as $mot) {
             $tag = new Tag();
             $tag->setEnabled(true);
-            $tag->setContext($this->getReference('site-context'));
+            $tag->setContext($context);
             $tag->setName($mot);
             $em->persist($tag);
             $this->addReference("tag-$mot", $tag);
@@ -68,6 +71,6 @@ class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 1; // the order in which fixtures will be loaded
+        return 1; // After Context
     }
 }

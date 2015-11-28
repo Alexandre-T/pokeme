@@ -1,6 +1,9 @@
 AppBundle\Entity\Site:
   type: entity
   table: te_site_sit
+  gedmo:
+    loggable:
+      loggable: true
   id:
     id:
       type: integer
@@ -18,6 +21,8 @@ AppBundle\Entity\Site:
       column: sit_libelle
       options:
         comment: Titre du site
+      gedmo:
+        - versioned
     description:
       type: text
       length: 16777215
@@ -25,6 +30,8 @@ AppBundle\Entity\Site:
       column: sit_description
       options:
         comment: Description du site
+      gedmo:
+        - versioned
     url:
       type: string
       unique: true
@@ -33,24 +40,49 @@ AppBundle\Entity\Site:
       column: sit_url
       options:
         comment: Url officiel du site
+      gedmo:
+        - versioned
+    ipCreator:
+      type: string
+      length: 45
+      nullable: false
+      column: sit_created_ip
+      options:
+        comment: IP de creation
+      gedmo:
+        ipTraceable:
+          on: create
+    ipUpdater:
+      type: string
+      length: 45
+      nullable: false
+      column: sit_updated_ip
+      options:
+        comment: IP de modification
+      gedmo:
+        ipTraceable:
+          on: update
     created:
       type: datetime
       nullable: false
       column: new_creation
       options:
         comment: Creation date
+      gedmo:
+        timestampable:
+          on: create
     updated:
       type: datetime
       nullable: true
       column: new_update
       options:
         comment: Update date
+      gedmo:
+        timestampable:
+          on: update
   indexes:
     i1_site:
       columns: [sit_libelle]
-  lifecycleCallbacks:
-    prePersist: [setCreatedValue]
-    preUpdate: [setUpdatedValue]
   oneToOne:
     validation:
       targetEntity: AppBundle\Entity\Validation

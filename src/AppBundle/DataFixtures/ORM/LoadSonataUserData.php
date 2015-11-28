@@ -64,18 +64,14 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
     {
         //Données de tests
         if ($this->isEnvironment(array('test', 'dev'))) {
-            /*
-             * @var \Sonata\UserBundle\Entity\UserManager
-             */
+            /* @var \Sonata\UserBundle\Entity\UserManager */
             $userManager = $this->container->get('fos_user.user_manager');
             $birth = date_create('1985-10-10');
             $oneDay = new \DateInterval('P1D');
 
             //Members creation
             for ($index = 1; $index < self::MEMBERS; ++$index) {
-                /*
-                 * @var \Application\Sonata\UserBundle\Entity\User
-                 */
+                /* @var \Application\Sonata\UserBundle\Entity\User */
                 $member = $userManager->createUser();
                 $member->setEmail("membre$index@example.org");
                 $member->setWebsite("www$index.example.org");
@@ -96,6 +92,7 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
             }
 
             for ($index = self::MEMBERS; $index < self::ADMINISTRATORS; ++$index) {
+                /* @var \Application\Sonata\UserBundle\Entity\User */
                 $administrator = $userManager->createUser();
                 $administrator->setEmail("administrator$index@example.org");
                 $administrator->setWebsite("www$index.example.org");
@@ -114,6 +111,7 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
                 $this->addReference("user-administrator-$index", $administrator);
             }
             for ($index = self::ADMINISTRATORS; $index < self::SUPERADMIN; ++$index) {
+                /* @var \Application\Sonata\UserBundle\Entity\User */
                 $superAdmin = $userManager->createUser();
                 $superAdmin->setEmail("superAdmin$index@example.org");
                 $superAdmin->setWebsite("www$index.example.org");
@@ -140,6 +138,6 @@ class LoadSonataUserData extends AbstractLoadData implements OrderedFixtureInter
      */
     public function getOrder()
     {
-        return 20; // the order in which fixtures will be loaded
+        return 1; // After Group
     }
 }

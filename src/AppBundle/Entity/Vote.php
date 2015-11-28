@@ -16,7 +16,8 @@
  */
 namespace AppBundle\Entity;
 
-use AppBundle\Model\HorodateInterface;
+use AppBundle\Model\IpTraceableInterface;
+use AppBundle\Model\TimestampableInterface;
 use Application\Sonata\UserBundle\Entity\User;
 
 /**
@@ -29,7 +30,7 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class Vote extends AbstractEntity implements HorodateInterface
+class Vote extends AbstractEntity implements TimestampableInterface, IpTraceableInterface
 {
     /**
      * @var int
@@ -40,11 +41,6 @@ class Vote extends AbstractEntity implements HorodateInterface
      * @var Annuaire
      */
     private $annuaire;
-
-    /**
-     * @var int
-     */
-    private $ip;
 
     /**
      * @var User
@@ -60,6 +56,13 @@ class Vote extends AbstractEntity implements HorodateInterface
      * @var string
      */
     private $tracker;
+
+    /**
+     * Points given by this vote.
+     *
+     * @var int
+     */
+    private $point;
 
     /**
      * Get id.
@@ -144,30 +147,6 @@ class Vote extends AbstractEntity implements HorodateInterface
     }
 
     /**
-     * Set ip.
-     *
-     * @param int
-     *
-     * @return Vote
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-
-        return $this;
-    }
-
-    /**
-     * Get ip.
-     *
-     * @return int
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
      * Set tracker.
      *
      * @param string
@@ -189,5 +168,29 @@ class Vote extends AbstractEntity implements HorodateInterface
     public function getTracker()
     {
         return $this->tracker;
+    }
+
+    /**
+     * Return the number of points given by this vote.
+     *
+     * @return int
+     */
+    public function getPoint()
+    {
+        return $this->point;
+    }
+
+    /**
+     * Set Point for this vote.
+     *
+     * @param mixed $point
+     *
+     * @return Vote
+     */
+    public function setPoint($point)
+    {
+        $this->point = $point;
+
+        return $this;
     }
 }

@@ -16,7 +16,7 @@
  */
 namespace AppBundle\Entity;
 
-use AppBundle\Model\HorodateInterface;
+use AppBundle\Model\IpTraceableInterface;
 use Application\Sonata\UserBundle\Entity\User;
 
 /**
@@ -29,7 +29,7 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class Validation extends AbstractEntity implements HorodateInterface
+class Validation extends AbstractEntity implements IpTraceableInterface
 {
     /**
      * Statut accepté.

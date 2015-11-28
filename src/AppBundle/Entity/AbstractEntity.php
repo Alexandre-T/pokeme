@@ -16,7 +16,8 @@
  */
 namespace AppBundle\Entity;
 
-use AppBundle\Model\HorodateInterface;
+use AppBundle\Model\IpTraceableInterface;
+use AppBundle\Model\TimestampableInterface;
 
 /**
  * Abstract Entity.
@@ -28,7 +29,7 @@ use AppBundle\Model\HorodateInterface;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-abstract class AbstractEntity implements HorodateInterface
+abstract class AbstractEntity implements TimestampableInterface, IpTraceableInterface
 {
     /**
      * @var \DateTime
@@ -39,6 +40,16 @@ abstract class AbstractEntity implements HorodateInterface
      * @var \DateTime
      */
     protected $updated;
+
+    /**
+     * @var string
+     */
+    protected $ipCreator;
+
+    /**
+     * @var string
+     */
+    protected $ipUpdater;
 
     /**
      * Set created.
@@ -89,27 +100,49 @@ abstract class AbstractEntity implements HorodateInterface
     }
 
     /**
-     * Initialize Creation Date.
+     * Get IP of creator.
      *
-     * @return AbstractEntity
+     * @return string
      */
-    public function setCreatedValue()
+    public function getIpCreator()
     {
-        if (!$this->getCreated()) {
-            $this->created = new \DateTime();
-        }
+        return $this->ipCreator;
+    }
+
+    /**
+     * Set Ip of creator.
+     *
+     * @param string $ipCreator
+     *
+     * @return AbstractOwned
+     */
+    public function setIpCreator($ipCreator)
+    {
+        $this->ipCreator = $ipCreator;
 
         return $this;
     }
 
     /**
-     * Update Updated Date.
+     * Get IP of updater.
      *
-     * @return AbstractEntity
+     * @return string
      */
-    public function setUpdatedValue()
+    public function getIpUpdater()
     {
-        $this->updated = new \DateTime();
+        return $this->ipUpdater;
+    }
+
+    /**
+     * Set IP of updater.
+     *
+     * @param string $ipUpdater
+     *
+     * @return AbstractOwned
+     */
+    public function setIpUpdater($ipUpdater)
+    {
+        $this->ipUpdater = $ipUpdater;
 
         return $this;
     }

@@ -4,6 +4,19 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+#    app.example:
+#        class: %app.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+#        calls:
+#            - [setService, [@service_id]]
+#        tags:
+#            - { name: twig.extension }
+#            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+    app.annuaire_manager:
+        class: AppBundle\Model\AnnuaireManager
+        arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
+#        calls:
+#            - [setService, [@service_id]]
+#        tags:
+#            - { name: twig.extension }
+#            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

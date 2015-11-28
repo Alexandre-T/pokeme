@@ -26,7 +26,7 @@ namespace AppBundle\Model;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-interface HorodateInterface
+interface TimestampableInterface
 {
     /**
      * Get last update date time.
@@ -47,7 +47,7 @@ interface HorodateInterface
      *
      * @param \DateTime $created
      *
-     * @return HorodateInterface
+     * @return TimestampableInterface
      */
     public function setCreated(\DateTime $created);
 
@@ -56,21 +56,7 @@ interface HorodateInterface
      *
      * @param \DateTime $updated
      *
-     * @return HorodateInterface
+     * @return TimestampableInterface
      */
     public function setUpdated(\DateTime $updated);
-
-    /**
-     * Update Updated Date.
-     *
-     * @return HorodateInterface
-     */
-    public function setUpdatedValue();
-
-    /**
-     * Initialize Creation Date.
-     *
-     * @return HorodateInterface
-     */
-    public function setCreatedValue();
 }
