@@ -38,7 +38,23 @@ class AbstractLoadDataTest extends \PHPUnit_Framework_TestCase
     private $abstractLoadData;
 
     /**
-     * Test the randTrueFalse method.
+     * Test setter of property container.
+     *
+     * @covers AppBundle\DataFixtures\ORM\AbstractLoadData::setContainer()
+     */
+    public function testSetContainer()
+    {
+        $container = $this->getMockBuilder('Symfony\Component\DependencyInjection\ContainerInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->abstractLoadData->setContainer($container);
+        $this->assertEquals($container, \PHPUnit_Framework_Assert::readAttribute($this->abstractLoadData, 'container'));
+    }
+
+    /**
+     * Test randTrueFalse Method.
+     *
+     * @covers AppBundle\DataFixtures\ORM\AbstractLoadData::randTrueFalse
      */
     public function testRandTrueFalse()
     {
@@ -52,7 +68,9 @@ class AbstractLoadDataTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the isEnvironment method.
+     * Test method isEnvironment with array and comma separated words.
+     *
+     * @covers AppBundle\DataFixtures\ORM\AbstractLoadData::isEnvironment
      */
     public function testIsEnvironment()
     {

@@ -28,6 +28,7 @@
             <exclude>
                 <directory>../src/Application/Sonata/*Bundle/Resources</directory>
                 <directory>../src/Application/Sonata/*Bundle/Resources/Tests</directory>
+                <directory>../src/Application/Sonata/*Bundle/Tests</directory>
                 <directory>../src/*Bundle/Resources</directory>
                 <directory>../src/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>

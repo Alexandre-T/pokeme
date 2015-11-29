@@ -58,7 +58,9 @@ class GroupTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Constructs the test case.
+     * Test constructor of Group Entity.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\Group::__construct
      */
     public function testConstruct()
     {
@@ -66,7 +68,9 @@ class GroupTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Group->getId().
+     * Test getter of id property.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\Group::getId()
      */
     public function testGetId()
     {

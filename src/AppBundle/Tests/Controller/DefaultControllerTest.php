@@ -33,6 +33,8 @@ class DefaultControllerTest extends WebTestCase
 {
     /**
      * Test Index action.
+     *
+     * @covers AppBundle\Controller\DefaultController::indexAction
      */
     public function testIndex()
     {

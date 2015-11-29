@@ -29,7 +29,7 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class ValidationTest extends \PHPUnit_Framework_TestCase
+class ValidationTest extends AbstractEntityTest
 {
     /**
      * Validation entity class to Test.
@@ -59,7 +59,7 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Validation->__construct().
+     * Test constructor of Validation Entity.
      */
     public function testConstruct()
     {
@@ -75,7 +75,10 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Validation->setReason() Validation->getReason().
+     * Test getter and setter of reason property.
+     *
+     * @covers AppBundle\Entity\Validation::setReason()
+     * @covers AppBundle\Entity\Validation::getReason()
      */
     public function testSetReason()
     {
@@ -85,7 +88,10 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Validation->setValidator() Validation->getValidator().
+     * Test getter and setter of validator property.
+     *
+     * @covers AppBundle\Entity\Validation::setValidator()
+     * @covers AppBundle\Entity\Validation::getValidator()
      */
     public function testSetValidator()
     {
@@ -95,9 +101,12 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Validation->setStatus() Validation->getStatus().
+     * Test getter and setter of status property.
+     *
+     * @covers AppBundle\Entity\Validation::setStatus()
+     * @covers AppBundle\Entity\Validation::getStatus()
      */
-    public function testSetStatus()
+    public function testStatus()
     {
         $this->validation->setStatus(Validation::ACCEPTE);
         $this->assertEquals(Validation::ACCEPTE, $this->validation->getStatus());
@@ -117,9 +126,13 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Validation->setValidated() Validation->getValidated() Validation->isValidated().
+     * Test getter and setter of validated property.
+     *
+     * @covers AppBundle\Entity\Validation::setValidated()
+     * @covers AppBundle\Entity\Validation::getValidated()
+     * @covers AppBundle\Entity\Validation::isValidated()
      */
-    public function testSetValidated()
+    public function testValidated()
     {
         $this->assertFalse($this->validation->isValidated());
         $this->assertNull($this->validation->getValidated());

@@ -21,7 +21,6 @@ use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Validation;
 use AppBundle\Entity\Vote;
 use Application\Sonata\ClassificationBundle\Entity\Tag;
-use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 
 /**
@@ -34,7 +33,7 @@ use Doctrine\Common\Collections\Collection;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class AnnuaireTest extends AbstractEntityTest
+class AnnuaireTest extends AbstractOwnedTest
 {
     /**
      * Prepares the environment before running a test.
@@ -57,15 +56,9 @@ class AnnuaireTest extends AbstractEntityTest
     }
 
     /**
-     * Tests User->getId().
-     */
-    public function testGetId()
-    {
-        $this->assertNull($this->object->getId());
-    }
-
-    /**
-     * Test Annuaire->__construct().
+     * Test Constructor of Annuaire Entity.
+     *
+     * @covers AppBundle\Entity\Annuaire::__construct()
      */
     public function testConstruct()
     {
@@ -84,7 +77,11 @@ class AnnuaireTest extends AbstractEntityTest
     }
 
     /**
-     * Tests User->addVote() testRemoveVote() testGetVotes().
+     * Test manipulation of Vote collection.
+     *
+     * @covers AppBundle\Entity\Annuaire::addVote()
+     * @covers AppBundle\Entity\Annuaire::removeVote()
+     * @covers AppBundle\Entity\Annuaire::getVotes()
      */
     public function testAddVote()
     {
@@ -121,7 +118,11 @@ class AnnuaireTest extends AbstractEntityTest
     }
 
     /**
-     * Tests User->addSite() User->removeSite() User->getSites().
+     * Test manipulation of Site collection.
+     *
+     * @covers AppBundle\Entity\Annuaire::addSite()
+     * @covers AppBundle\Entity\Annuaire::removeSite()
+     * @covers AppBundle\Entity\Annuaire::getSites()
      */
     public function testAddSite()
     {
@@ -157,7 +158,11 @@ class AnnuaireTest extends AbstractEntityTest
     }
 
     /**
-     * Tests Annuaire->addTag() Annuaire->removeTag() Annuaire->getTags().
+     * Test manipulation of tag collection.
+     *
+     * @covers AppBundle\Entity\Annuaire::addTag()
+     * @covers AppBundle\Entity\Annuaire::removeTag()
+     * @covers AppBundle\Entity\Annuaire::getTags()
      */
     public function testAddTag()
     {
@@ -193,49 +198,12 @@ class AnnuaireTest extends AbstractEntityTest
     }
 
     /**
-     * Tests annuaire->setName() annuaire->getName().
+     * Test getter and setter of Validation property.
+     *
+     * @covers AppBundle\Entity\Annuaire::setValidation()
+     * @covers AppBundle\Entity\Annuaire::getValidation()
      */
-    public function testSetName()
-    {
-        $name = 'name';
-        $this->object->setName($name);
-        $this->assertEquals($name, $this->object->getName());
-    }
-
-    /**
-     * Tests annuaire->setDescription() annuaire->getDescription().
-     */
-    public function testSetDescription()
-    {
-        $description = 'description';
-        $this->object->setDescription($description);
-        $this->assertEquals($description, $this->object->getDescription());
-    }
-
-    /**
-     * Tests annuaire->setUrl() annuaire->getUrl().
-     */
-    public function testSetUrl()
-    {
-        $url = 'http://www.example.org';
-        $this->object->setUrl($url);
-        $this->assertEquals($url, $this->object->getUrl());
-    }
-
-    /**
-     * Tests annuaire->setOwner() annuaire->getOwner().
-     */
-    public function testSetOwner()
-    {
-        $owner = new User();
-        $this->object->setOwner($owner);
-        $this->assertEquals($owner, $this->object->getOwner());
-    }
-
-    /**
-     * Tests annuaire->setName() annuaire->getName().
-     */
-    public function testSetValidator()
+    public function testValidation()
     {
         $validation = new Validation();
         $this->object->setValidation($validation);

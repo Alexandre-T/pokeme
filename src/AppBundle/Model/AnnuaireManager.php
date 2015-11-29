@@ -18,6 +18,8 @@
 namespace AppBundle\Model;
 
 use AppBundle\Entity\Annuaire;
+use AppBundle\Entity\Validation;
+use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -32,17 +34,30 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class AnnuaireManager
 {
+    /**
+     * Object Manager.
+     *
+     * @var ObjectManager
+     */
     protected $objectManager;
-    protected $class;
+
+    /**
+     * Repository of Annuaire Entity.
+     *
+     * @var \Doctrine\Common\Persistence\ObjectRepository
+     */
     protected $repository;
 
+    /**
+     * AnnuaireManager constructor.
+     *
+     * @param ObjectManager $om
+     * @param string        $class
+     */
     public function __construct(ObjectManager $om, $class)
     {
         $this->objectManager = $om;
         $this->repository = $om->getRepository($class);
-
-        $metadata = $om->getClassMetadata($class);
-        $this->class = $metadata->getName();
     }
 
     /**
@@ -64,6 +79,51 @@ class AnnuaireManager
     {
         $this->objectManager->remove($annuaire);
         $this->objectManager->flush();
+    }
+
+    /**
+     * Validate an Annuaire.
+     *
+     * @param Annuaire    $annuaire
+     * @param User        $user
+     * @param string|null $reason
+     */
+    public function validateAnnuaire(Annuaire $annuaire, User $user, $reason = null)
+    {
+        $validation = $annuaire->getValidation();
+        $validation->setValidator($user);
+        $validation->setStatus(Validation::ACCEPTE);
+        $validation->setReason($reason);
+    }
+
+    /**
+     * Reject an Annuaire.
+     *
+     * @param Annuaire    $annuaire
+     * @param User        $user
+     * @param string|null $reason
+     */
+    public function rejectAnnuaire(Annuaire $annuaire, User $user, $reason = null)
+    {
+        $validation = $annuaire->getValidation();
+        $validation->setValidator($user);
+        $validation->setStatus(Validation::REFUSE);
+        $validation->setReason($reason);
+    }
+
+    /**
+     * Let waiting an Annuaire.
+     *
+     * @param Annuaire    $annuaire
+     * @param User        $user
+     * @param string|null $reason
+     */
+    public function stayWaitingAnnuaire(Annuaire $annuaire, User $user, $reason = null)
+    {
+        $validation = $annuaire->getValidation();
+        $validation->setValidator($user);
+        $validation->setStatus(Validation::EN_ATTENTE);
+        $validation->setReason($reason);
     }
 
     /**

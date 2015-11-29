@@ -32,21 +32,29 @@ use AppBundle\Model\TimestampableInterface;
 abstract class AbstractEntity implements TimestampableInterface, IpTraceableInterface
 {
     /**
+     * Creation date.
+     *
      * @var \DateTime
      */
     protected $created;
 
     /**
+     * Update date.
+     *
      * @var \DateTime
      */
     protected $updated;
 
     /**
+     * Ip of creator.
+     *
      * @var string
      */
     protected $ipCreator;
 
     /**
+     * Ip of last updater.
+     *
      * @var string
      */
     protected $ipUpdater;

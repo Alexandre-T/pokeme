@@ -26,6 +26,8 @@ use Application\Sonata\UserBundle\ApplicationSonataUserBundle;
 class ApplicationSonataUserBundleTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Instance to test.
+     *
      * @var ApplicationSonataUserBundle
      */
     private $applicationSonataUserBundle;
@@ -50,6 +52,8 @@ class ApplicationSonataUserBundleTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Test getParent method.
+     *
+     * @covers  Application\Sonata\UserBundle\ApplicationSonataUserBundle::getParent
      */
     public function testGetParent()
     {

@@ -56,9 +56,12 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests AbstractEntity->setCreated() AbstractEntity->getCreated().
+     * Test getter and setter of created property.
+     *
+     * @covers AppBundle\Entity\AbstractEntity::setCreated()
+     * @covers AppBundle\Entity\AbstractEntity::getCreated()
      */
-    public function testSetCreated()
+    public function testCreated()
     {
         $date = new \DateTime();
         $this->object->setCreated($date);
@@ -66,9 +69,12 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests AbstractEntity->setUpdated() AbstractEntity->getUpdated().
+     * Test getter and setter of updated property.
+     *
+     * @covers AppBundle\Entity\AbstractEntity::setUpdated()
+     * @covers AppBundle\Entity\AbstractEntity::getUpdated()
      */
-    public function testSetUpdated()
+    public function testUpdated()
     {
         $updated = new \DateTime();
         $this->object->setUpdated($updated);
@@ -76,9 +82,12 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests AbstractEntity->setIpCreator() AbstractEntity->getIpCreator().
+     * Test getter and setter of ipCreator property.
+     *
+     * @covers AppBundle\Entity\AbstractEntity::setIpCreator()
+     * @covers AppBundle\Entity\AbstractEntity::getIpCreator()
      */
-    public function testSetIpCreator()
+    public function testIpCreator()
     {
         $ipV4 = '127.0.0.1';
         $ipV6 = 'fe80::226:18ff:fef9:2cbe/64';
@@ -89,9 +98,12 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests AbstractEntity->setIpUpdater() AbstractEntity->getIpUpdater().
+     * Test getter and setter of created property.
+     *
+     * @covers AppBundle\Entity\AbstractEntity::setIpUpdater()
+     * @covers AppBundle\Entity\AbstractEntity::getIpUpdater()
      */
-    public function testSetIpUpdater()
+    public function testIpUpdater()
     {
         $ipV4 = '127.0.0.1';
         $ipV6 = 'fe80::226:18ff:fef9:2cbe/64';

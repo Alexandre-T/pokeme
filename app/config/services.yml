@@ -15,8 +15,3 @@ services:
     app.annuaire_manager:
         class: AppBundle\Model\AnnuaireManager
         arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
-#        calls:
-#            - [setService, [@service_id]]
-#        tags:
-#            - { name: twig.extension }
-#            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }

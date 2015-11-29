@@ -33,26 +33,36 @@ use Application\Sonata\UserBundle\Entity\User;
 class Vote extends AbstractEntity implements TimestampableInterface, IpTraceableInterface
 {
     /**
+     * Identifier.
+     *
      * @var int
      */
     private $id;
 
     /**
+     * Annuaire of this vote.
+     *
      * @var Annuaire
      */
     private $annuaire;
 
     /**
+     * Voter.
+     *
      * @var User
      */
     private $user;
 
     /**
+     * Site of this vote.
+     *
      * @var Site
      */
     private $site;
 
     /**
+     * Tracker to find real owner and detect bot.
+     *
      * @var string
      */
     private $tracker;

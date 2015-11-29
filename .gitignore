@@ -8,6 +8,7 @@ app/logs/*
 app/config/parameters.yml
 #phpdoc Ignore everything in this directory
 docs/phpdoc/*
+build/logs/clover.xml
 #phpdoc Except these files
 !docs/phpdoc/readme.md
 #vendor or binary loaded by composer

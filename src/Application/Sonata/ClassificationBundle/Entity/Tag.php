@@ -44,11 +44,15 @@ class Tag extends BaseTag
     protected $id;
 
     /**
+     * Annuaire collection.
+     *
      * @var ArrayCollection
      */
     private $annuaires;
 
     /**
+     * Site collection.
+     *
      * @var ArrayCollection
      */
     private $sites;

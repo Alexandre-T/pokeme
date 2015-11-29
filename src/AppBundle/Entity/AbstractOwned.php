@@ -37,36 +37,50 @@ abstract class AbstractOwned extends AbstractEntity implements
     DescriptionInterface
 {
     /**
+     * Persistant identifier.
+     *
      * @var int
      */
     protected $id;
 
     /**
+     * Name of the entity.
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * Description of the entity.
+     *
      * @var string
      */
     protected $description;
 
     /**
+     * Owner of the Entity.
+     *
      * @var User
      */
     protected $owner;
 
     /**
+     * Url of the entity.
+     *
      * @var string
      */
     protected $url;
 
     /**
+     * Url slugified.
+     *
      * @var string
      */
     protected $slugUrl;
 
     /**
+     * Name slugified.
+     *
      * @var string
      */
     protected $slugName;
@@ -198,6 +212,8 @@ abstract class AbstractOwned extends AbstractEntity implements
     }
 
     /**
+     * Setter of slugUrl.
+     *
      * @param string $slugUrl
      *
      * @return DescriptionInterface
@@ -210,6 +226,8 @@ abstract class AbstractOwned extends AbstractEntity implements
     }
 
     /**
+     * Getter of slug url.
+     *
      * @param string $slugName
      *
      * @return DescriptionInterface

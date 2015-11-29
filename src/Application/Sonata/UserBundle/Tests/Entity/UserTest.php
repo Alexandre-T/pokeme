@@ -18,6 +18,7 @@ namespace Application\Sonata\UserBundle\Tests\Entity;
 
 use AppBundle\Entity\Annuaire;
 use AppBundle\Entity\Site;
+use AppBundle\Entity\Vote;
 use Application\Sonata\UserBundle\Entity\User as UserEntity;
 use Doctrine\Common\Collections\Collection;
 
@@ -38,7 +39,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
      *
      * @var UserEntity
      */
-    private $user;
+    private $object;
 
     /**
      * Prepares the environment before running a test.
@@ -47,7 +48,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->user = new UserEntity();
+        $this->object = new UserEntity();
     }
 
     /**
@@ -55,34 +56,42 @@ class UserTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->user = null;
+        $this->object = null;
 
         parent::tearDown();
     }
 
     /**
-     * Tests User->getId().
+     * Test getter of id property.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\User::getId()
      */
     public function testGetId()
     {
-        $this->assertNull($this->user->getId());
+        $this->assertNull($this->object->getId());
     }
 
     /**
-     * Test User->__construct().
+     * Test constructor.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\User::__construct()
      */
     public function testConstruct()
     {
-        $this->user = new UserEntity();
-        $this->assertNull($this->user->getId());
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->user->getOwnedAnnuaires());
-        $this->assertEquals(0, $this->user->getOwnedAnnuaires()->count());
-        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->user->getOwnedSites());
-        $this->assertEquals(0, $this->user->getOwnedSites()->count());
+        $this->object = new UserEntity();
+        $this->assertNull($this->object->getId());
+        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->object->getOwnedAnnuaires());
+        $this->assertEquals(0, $this->object->getOwnedAnnuaires()->count());
+        $this->assertInstanceOf('Doctrine\Common\Collections\ArrayCollection', $this->object->getOwnedSites());
+        $this->assertEquals(0, $this->object->getOwnedSites()->count());
     }
 
     /**
-     * Tests User->addOwnedAnnuaire() testRemoveOwnedAnnuaire() testGetOwnedAnnuaires().
+     * Test manipulation of Annuaire collection.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\User::addOwnedAnnuaire()
+     * @covers Application\Sonata\UserBundle\Entity\User::removeOwnedAnnuaire()
+     * @covers Application\Sonata\UserBundle\Entity\User::getOwnedAnnuaires()
      */
     public function testAddOwnedAnnuaire()
     {
@@ -90,36 +99,40 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $ownedAnnuaires[1] = new Annuaire();
         $ownedAnnuaires[2] = new Annuaire();
 
-        $this->assertTrue($this->user->getOwnedAnnuaires() instanceof Collection);
-        $this->assertEquals(0, $this->user->getOwnedAnnuaires()->count());
+        $this->assertTrue($this->object->getOwnedAnnuaires() instanceof Collection);
+        $this->assertEquals(0, $this->object->getOwnedAnnuaires()->count());
 
-        $this->user->addOwnedAnnuaire($ownedAnnuaires[0]);
-        $this->assertEquals(1, $this->user->getOwnedAnnuaires()->count());
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
+        $this->object->addOwnedAnnuaire($ownedAnnuaires[0]);
+        $this->assertEquals(1, $this->object->getOwnedAnnuaires()->count());
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
 
-        $this->user->addOwnedAnnuaire($ownedAnnuaires[1]);
-        $this->assertEquals(2, $this->user->getOwnedAnnuaires()->count());
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
+        $this->object->addOwnedAnnuaire($ownedAnnuaires[1]);
+        $this->assertEquals(2, $this->object->getOwnedAnnuaires()->count());
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
 
-        $this->user->removeOwnedAnnuaire($ownedAnnuaires[2]);
-        $this->assertEquals(2, $this->user->getOwnedAnnuaires()->count());
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
+        $this->object->removeOwnedAnnuaire($ownedAnnuaires[2]);
+        $this->assertEquals(2, $this->object->getOwnedAnnuaires()->count());
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
 
-        $this->user->removeOwnedAnnuaire($ownedAnnuaires[0]);
-        $this->assertEquals(1, $this->user->getOwnedAnnuaires()->count());
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
-        $this->assertTrue($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
-        $this->assertFalse($this->user->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
+        $this->object->removeOwnedAnnuaire($ownedAnnuaires[0]);
+        $this->assertEquals(1, $this->object->getOwnedAnnuaires()->count());
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[0]));
+        $this->assertTrue($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[1]));
+        $this->assertFalse($this->object->getOwnedAnnuaires()->contains($ownedAnnuaires[2]));
     }
 
     /**
-     * Tests User->addOwnedSites() testRemoveOwnedSites() testGetOwnedSites().
+     * Test manipulation of owned sites collection.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\User::addOwnedSite()
+     * @covers Application\Sonata\UserBundle\Entity\User::removeOwnedSite()
+     * @covers Application\Sonata\UserBundle\Entity\User::getOwnedSites()
      */
     public function testAddOwnedSites()
     {
@@ -127,31 +140,72 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $ownedSites[1] = new Site();
         $ownedSites[2] = new Site();
 
-        $this->assertTrue($this->user->getOwnedSites() instanceof Collection);
-        $this->assertEquals(0, $this->user->getOwnedSites()->count());
+        $this->assertTrue($this->object->getOwnedSites() instanceof Collection);
+        $this->assertEquals(0, $this->object->getOwnedSites()->count());
 
-        $this->user->addOwnedSite($ownedSites[0]);
-        $this->assertEquals(1, $this->user->getOwnedSites()->count());
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[0]));
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[1]));
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[2]));
+        $this->object->addOwnedSite($ownedSites[0]);
+        $this->assertEquals(1, $this->object->getOwnedSites()->count());
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[0]));
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[1]));
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[2]));
 
-        $this->user->addOwnedSite($ownedSites[1]);
-        $this->assertEquals(2, $this->user->getOwnedSites()->count());
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[0]));
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[1]));
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[2]));
+        $this->object->addOwnedSite($ownedSites[1]);
+        $this->assertEquals(2, $this->object->getOwnedSites()->count());
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[0]));
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[1]));
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[2]));
 
-        $this->user->removeOwnedSite($ownedSites[2]);
-        $this->assertEquals(2, $this->user->getOwnedSites()->count());
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[0]));
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[1]));
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[2]));
+        $this->object->removeOwnedSite($ownedSites[2]);
+        $this->assertEquals(2, $this->object->getOwnedSites()->count());
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[0]));
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[1]));
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[2]));
 
-        $this->user->removeOwnedSite($ownedSites[0]);
-        $this->assertEquals(1, $this->user->getOwnedSites()->count());
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[0]));
-        $this->assertTrue($this->user->getOwnedSites()->contains($ownedSites[1]));
-        $this->assertFalse($this->user->getOwnedSites()->contains($ownedSites[2]));
+        $this->object->removeOwnedSite($ownedSites[0]);
+        $this->assertEquals(1, $this->object->getOwnedSites()->count());
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[0]));
+        $this->assertTrue($this->object->getOwnedSites()->contains($ownedSites[1]));
+        $this->assertFalse($this->object->getOwnedSites()->contains($ownedSites[2]));
+    }
+
+    /**
+     * Test manipulation of votes collection.
+     *
+     * @covers Application\Sonata\UserBundle\Entity\User::addVote()
+     * @covers Application\Sonata\UserBundle\Entity\User::removeVote()
+     * @covers Application\Sonata\UserBundle\Entity\User::getVotes()
+     */
+    public function testAddVote()
+    {
+        $votes[0] = new Vote();
+        $votes[1] = new Vote();
+        $votes[2] = new Vote();
+
+        $this->assertTrue($this->object->getVotes() instanceof Collection);
+        $this->assertEquals(0, $this->object->getVotes()->count());
+
+        $this->object->addVote($votes[0]);
+        $this->assertEquals(1, $this->object->getVotes()->count());
+        $this->assertTrue($this->object->getVotes()->contains($votes[0]));
+        $this->assertFalse($this->object->getVotes()->contains($votes[1]));
+        $this->assertFalse($this->object->getVotes()->contains($votes[2]));
+
+        $this->object->addVote($votes[1]);
+        $this->assertEquals(2, $this->object->getVotes()->count());
+        $this->assertTrue($this->object->getVotes()->contains($votes[0]));
+        $this->assertTrue($this->object->getVotes()->contains($votes[1]));
+        $this->assertFalse($this->object->getVotes()->contains($votes[2]));
+
+        $this->object->removeVote($votes[2]);
+        $this->assertEquals(2, $this->object->getVotes()->count());
+        $this->assertTrue($this->object->getVotes()->contains($votes[0]));
+        $this->assertTrue($this->object->getVotes()->contains($votes[1]));
+        $this->assertFalse($this->object->getVotes()->contains($votes[2]));
+
+        $this->object->removeVote($votes[0]);
+        $this->assertEquals(1, $this->object->getVotes()->count());
+        $this->assertFalse($this->object->getVotes()->contains($votes[0]));
+        $this->assertTrue($this->object->getVotes()->contains($votes[1]));
+        $this->assertFalse($this->object->getVotes()->contains($votes[2]));
     }
 }

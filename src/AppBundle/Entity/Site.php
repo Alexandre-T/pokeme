@@ -32,21 +32,29 @@ use Sonata\ClassificationBundle\Model\Tag;
 class Site extends AbstractOwned
 {
     /**
+     * Votes for this site.
+     *
      * @var ArrayCollection
      */
     private $votes;
 
     /**
+     * Annuaire where this site is referenced.
+     *
      * @var ArrayCollection
      */
     private $annuaires;
 
     /**
+     * Tags of this site.
+     *
      * @var ArrayCollection
      */
     private $tags;
 
     /**
+     * Validation status of this site.
+     *
      * @var Validation
      */
     private $validation;

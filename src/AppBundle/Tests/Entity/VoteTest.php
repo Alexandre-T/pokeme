@@ -31,7 +31,7 @@ use Application\Sonata\UserBundle\Entity\User;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class VoteTest extends \PHPUnit_Framework_TestCase
+class VoteTest extends AbstractEntityTest
 {
     /**
      * Vote entity class to Test.
@@ -61,15 +61,7 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->getId().
-     */
-    public function testGetId()
-    {
-        $this->assertNull($this->vote->getId());
-    }
-
-    /**
-     * Test Vote->__construct().
+     * Test constructor.
      */
     public function testConstruct()
     {
@@ -82,7 +74,10 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setAnnuaire() Vote->getAnnuaire().
+     * Test getter and setter of Annuaire property.
+     *
+     * @covers AppBundle\Entity\Vote::setAnnuaire()
+     * @covers AppBundle\Entity\Vote::getAnnuaire()
      */
     public function testSetAnnuaire()
     {
@@ -92,7 +87,10 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setSite() Vote->getSite().
+     * Test getter and setter of Site property.
+     *
+     * @covers AppBundle\Entity\Vote::setSite()
+     * @covers AppBundle\Entity\Vote::getSite()
      */
     public function testSetSite()
     {
@@ -102,7 +100,10 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setTracker() Vote->getTracker().
+     * Test getter and setter of tracker property.
+     *
+     * @covers AppBundle\Entity\Vote::setTracker()
+     * @covers AppBundle\Entity\Vote::getTracker()
      */
     public function testSetTracker()
     {
@@ -112,9 +113,12 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setUser() Vote->getUser().
+     * Test getter and setter of User property.
+     *
+     * @covers AppBundle\Entity\Vote::setUser()
+     * @covers AppBundle\Entity\Vote::getUser()
      */
-    public function testSetUser()
+    public function testUser()
     {
         $user = new User();
         $this->vote->setUser($user);
@@ -122,19 +126,12 @@ class VoteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Vote->setCreated() Vote->getCreated().
+     * Test getter and setter of point property.
+     *
+     * @covers AppBundle\Entity\Vote::setPoint()
+     * @covers AppBundle\Entity\Vote::getPoint()
      */
-    public function testSetCreated()
-    {
-        $date = new \DateTime();
-        $this->vote->setCreated($date);
-        $this->assertEquals($date, $this->vote->getCreated());
-    }
-
-    /**
-     * Tests Vote->setPoint() Vote->getPoint().
-     */
-    public function testSetPoint()
+    public function testPoint()
     {
         $expected = 3;
         $this->vote->setPoint($expected);

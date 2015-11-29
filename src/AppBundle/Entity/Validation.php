@@ -52,21 +52,29 @@ class Validation extends AbstractEntity implements IpTraceableInterface
     const REFUSE = 3;
 
     /**
+     * Identifier.
+     *
      * @var int
      */
     private $id;
 
     /**
+     * Reason of the status.
+     *
      * @var string
      */
     private $reason;
 
     /**
+     * Status of the linked entity.
+     *
      * @var int
      */
     private $status = self::EN_ATTENTE;
 
     /**
+     * Validator of the linked entity.
+     *
      * @var User
      */
     private $validator;

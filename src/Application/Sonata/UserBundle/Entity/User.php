@@ -48,16 +48,22 @@ class User extends BaseUser
     protected $id;
 
     /**
+     * Annuaires owned by this user.
+     *
      * @var ArrayCollection
      */
     private $ownedAnnuaires;
 
     /**
+     * Sites owned by this user.
+     *
      * @var ArrayCollection
      */
     private $ownedSites;
 
     /**
+     * Votes done by this user.
+     *
      * @var ArrayCollection
      */
     private $votes;
