@@ -16,15 +16,15 @@
  */
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Annuaire;
-use AppBundle\Model\AnnuaireManager;
+use AppBundle\Entity\Site;
+use AppBundle\Model\SiteManager;
 use Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Sonata\ClassificationBundle\Model\Tag;
 
 /**
- * Load development and test Annuaire data of PokeMe Application.
+ * Load development and test Site data of PokeMe Application.
  *
  * @category LoadDataFixture
  *
@@ -35,7 +35,7 @@ use Sonata\ClassificationBundle\Model\Tag;
  *
  * @codeCoverageIgnore
  */
-class LoadAnnuaireData extends AbstractLoadData implements OrderedFixtureInterface
+class LoadSiteData extends AbstractLoadData implements OrderedFixtureInterface
 {
     /**
      * Load data to database.
@@ -54,38 +54,40 @@ class LoadAnnuaireData extends AbstractLoadData implements OrderedFixtureInterfa
             /** @var Tag $tagApocalyptique */
             $tagApocalyptique = $this->getReference('tag-apocalyptique');
 
-            /** @var AnnuaireManager $annuaireManager */
-            $annuaireManager = $this->container->get('app.annuaire_manager');
-            for ($i = 1; $i < 26; ++$i) {
+            /** @var SiteManager $SiteManager */
+            $siteManager = $this->container->get('app.site_manager');
+            for ($i = 1; $i < 240; ++$i) {
                 /** @var User $user1 */
-                $user = $this->getReference("user-member-$i");
-                $admin = $this->getReference('user-administrator-'.($i + LoadSonataUserData::MEMBERS));
-                /** @var Annuaire $annuaire */
-                $annuaire = $annuaireManager->createAnnuaire();
-                $annuaire->setName("Annuaire numéro $i");
-                $annuaire->setDescription("Description de l'Annuaire numéro $i");
-                $annuaire->setIpCreator("127.0.0.$i");
-                $annuaire->setIpUpdater("127.0.1.$i");
-                $annuaire->setUrl("http://www.annuaire$i.example.org");
-                $annuaire->setOwner($user);
+                $user = $this->getReference('user-member-'.($i % 24 + 1));
+                $admin = $this->getReference('user-administrator-'.($i % 24 + LoadSonataUserData::MEMBERS));
+                /** @var Site $site */
+                $site = $siteManager->createSite();
+                $site->setName("Site numéro $i");
+                $site->setDescription("Description de l'Site numéro $i");
+                $site->setIpCreator("127.0.0.$i");
+                $site->setIpUpdater("127.0.1.$i");
+                $site->setUrl("http://www.site$i.example.org");
+                $site->setOwner($user);
                 if ($i < 10) {
-                    $annuaire->addTag($tagApocalyptique);
-                    $annuaireManager->validateAnnuaire($annuaire, $admin, 'validation par LoadAnnuaireData');
+                    $site->addTag($tagApocalyptique);
+                    $siteManager->validateSite($site, $admin, 'validation par LoadSiteData');
                 }
                 if ($i < 5) {
-                    $annuaire->addTag($tagHistorique);
-                    $annuaireManager->rejectAnnuaire($annuaire, $admin, 'refus par LoadAnnuaireData');
+                    $site->addTag($tagHistorique);
+                    $siteManager->rejectSite($site, $admin, 'refus par LoadSiteData');
                 }
                 if ($i > 15) {
-                    $annuaire->addTag($tagFuturiste);
-                    $annuaireManager->stayWaitingAnnuaire($annuaire, $admin, 'attente par LoadAnnuaireData');
+                    $site->addTag($tagFuturiste);
+                    $siteManager->stayWaitingSite($site, $admin, 'attente par LoadSiteData');
                 }
                 if ($i > 5 && $i < 15) {
-                    $annuaire->addTag($tagContemporain);
+                    $site->addTag($tagContemporain);
                 }
+                $site->addAnnuaire($this->getReference('annuaire-'.($i % 24 + 1)));
+                $site->addAnnuaire($this->getReference('annuaire-'.($i % 24 + 2)));
 
-                $annuaireManager->updateAnnuaire($annuaire);
-                $this->addReference("annuaire-$i", $annuaire);
+                $siteManager->updateSite($site);
+                $this->addReference("site-$i", $site);
             }
         }
     }
@@ -97,6 +99,6 @@ class LoadAnnuaireData extends AbstractLoadData implements OrderedFixtureInterfa
      */
     public function getOrder()
     {
-        return 2; // After User and Tag
+        return 3; // After User Tag Annuaire
     }
 }

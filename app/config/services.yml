@@ -15,3 +15,6 @@ services:
     app.annuaire_manager:
         class: AppBundle\Model\AnnuaireManager
         arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
+    app.site_manager:
+        class: AppBundle\Model\SiteManager
+        arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
