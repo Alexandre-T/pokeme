@@ -23,7 +23,7 @@ AppBundle\Entity\Vote:
     ipCreator:
       type: string
       length: 45
-      nullable: false
+      nullable: true
       column: vot_ip_creator
       options:
         comment: IP du voteur
@@ -33,7 +33,7 @@ AppBundle\Entity\Vote:
     ipUpdater:
       type: string
       length: 45
-      nullable: false
+      nullable: true
       column: vot_ip_updater
       options:
         comment: IP du voteur en cas de modification
@@ -69,11 +69,11 @@ AppBundle\Entity\Vote:
       targetEntity: AppBundle\Entity\Annuaire
       inversedBy: votes
       joinColumns:
-        classement_id:
+        annuaire_id:
           referencedColumnName: ann_id
   indexes:
     i1_vote:
-      columns: [vot_creation,classement_id,site_id]
+      columns: [vot_creation,annuaire_id,site_id]
     i2_vote:
       columns: [user_id,site_id,vot_creation]
     i3_vote:

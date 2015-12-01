@@ -54,7 +54,7 @@ class LoadSiteData extends AbstractLoadData implements OrderedFixtureInterface
             /** @var Tag $tagApocalyptique */
             $tagApocalyptique = $this->getReference('tag-apocalyptique');
 
-            /** @var SiteManager $SiteManager */
+            /* @var SiteManager $SiteManager */
             $siteManager = $this->container->get('app.site_manager');
             for ($i = 1; $i < 240; ++$i) {
                 /** @var User $user1 */

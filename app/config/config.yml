@@ -91,6 +91,7 @@ doctrine:
                     SonataUserBundle: ~
                     FOSUserBundle: ~
                     AppBundle: ~
+                    StofDoctrineExtensionsBundle: ~
                     #Gedmo Beginning
                     gedmo_translatable:
                         type: annotation
@@ -131,3 +132,4 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             loggable: true
+            blameable: true

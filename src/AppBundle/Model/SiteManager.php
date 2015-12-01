@@ -84,7 +84,7 @@ class SiteManager
     /**
      * Validate an Site.
      *
-     * @param Site    $site
+     * @param Site        $site
      * @param User        $user
      * @param string|null $reason
      */
@@ -99,7 +99,7 @@ class SiteManager
     /**
      * Reject an Site.
      *
-     * @param Site    $site
+     * @param Site        $site
      * @param User        $user
      * @param string|null $reason
      */
@@ -114,7 +114,7 @@ class SiteManager
     /**
      * Let waiting an Site.
      *
-     * @param Site    $site
+     * @param Site        $site
      * @param User        $user
      * @param string|null $reason
      */
@@ -139,8 +139,8 @@ class SiteManager
     /**
      * Updates an site.
      *
-     * @param Site $site
-     * @param Boolean  $andFlush Whether to flush the changes (default true)
+     * @param Site    $site
+     * @param Boolean $andFlush Whether to flush the changes (default true)
      */
     public function updateSite(Site $site, $andFlush = true)
     {

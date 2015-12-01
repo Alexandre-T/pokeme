@@ -2,7 +2,7 @@
 # http://symfony.com/doc/current/book/service_container.html
 parameters:
 #    parameter_name: value
-
+     alterphp_doctrine_extensions.event_listener.ip_trace.class: 'AppBundle\EventListener\IpTraceSubscriber'
 services:
 #    app.example:
 #        class: %app.example.class%
@@ -17,4 +17,31 @@ services:
         arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
     app.site_manager:
         class: AppBundle\Model\SiteManager
-        arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Annuaire']
+        arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Site']
+    app.vote_manager:
+        class: AppBundle\Model\VoteManager
+        arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Vote']
+
+    admin.category:
+        class: AppBundle\Admin\VoteAdmin
+        arguments: [~, AppBundle\Entity\Vote, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Vote }
+
+
+    gedmo_doctrine_extensions.listener.ip_traceable:
+        class: Gedmo\IpTraceable\IpTraceableListener
+        public: false
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [setAnnotationReader, [ "@annotation_reader"]]
+
+    alterphp_doctrine_extensions.event_listener.ip_trace:
+        class: %alterphp_doctrine_extensions.event_listener.ip_trace.class%
+        scope: request
+        arguments:
+            - @gedmo_doctrine_extensions.listener.ip_traceable
+            - @?request
+        tags:
+            - { name: kernel.event_subscriber}
