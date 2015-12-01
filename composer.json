@@ -7,7 +7,7 @@
           "name": "Alexandre Tranchant",
           "email": "Alexandre.Tranchant@gmail.com",
           "homepage": "https://github.com/Alexandre-T",
-          "role": "Developer"
+          "role": "Full stack developer"
       }
   ],
   "support": {
@@ -47,7 +47,8 @@
         "sonata-project/formatter-bundle": "^2.3",
         "mopa/bootstrap-bundle": "v3.0.0-rc1",
         "twbs/bootstrap": "~3.3.0",
-    "stof/doctrine-extensions-bundle": "^1.2"
+        "stof/doctrine-extensions-bundle": "^1.2",
+        "knplabs/knp-menu-bundle": "^2.1@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0"
