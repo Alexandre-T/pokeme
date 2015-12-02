@@ -16,14 +16,15 @@
  */
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\Validation;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 /**
- * Vote Admin Interface.
- * Class to manage Votes.
+ * Site Admin Interface.
+ * Class to manage Sites.
  *
  * @category AdminInterface
  *
@@ -32,7 +33,7 @@ use Sonata\AdminBundle\Form\FormMapper;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class VoteAdmin extends Admin
+class SiteAdmin extends Admin
 {
     /**
      * Setup the translation domain.
@@ -64,8 +65,6 @@ class VoteAdmin extends Admin
             ->add('created')
             ->add('ipCreator')
             ->add('ipUpdater')
-            ->add('tracker')
-            ->add('point')
         ;
     }
 
@@ -82,8 +81,6 @@ class VoteAdmin extends Admin
             ->add('created')
             ->add('ipCreator')
             ->add('ipUpdater')
-            ->add('tracker')
-            ->add('point')
         ;
     }
 
@@ -97,14 +94,16 @@ class VoteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
-            ->add('user.username')
-            ->add('site.name')
-            ->add('annuaire.name')
-            ->add('created')
-            ->add('ipCreator')
-            ->add('tracker')
-            ->add('point')
+            ->addIdentifier('name')
+            ->add('url', 'url')
+            ->add('validation.status', 'choice', array(
+                'choices' => array(
+                    Validation::ACCEPTE => 'Accepté',
+                    Validation::EN_ATTENTE => 'En attente',
+                    Validation::REFUSE => 'Refusé',
+                ), ))
+            ->add('validation.validator')
+            ->add('owner')
         ;
     }
 
@@ -122,10 +121,10 @@ class VoteAdmin extends Admin
         }
 
         $query = parent::createQuery($context);
-        $query->select('o', 'u', 's', 'a')
-            ->innerJoin('o.user', 'u')
-            ->innerJoin('o.site', 's')
-            ->innerJoin('o.annuaire ', 'a');
+        $query->select('o', 'u', 'v', 'v2')
+            ->innerJoin('o.owner', 'u')
+            ->leftJoin('o.validation', 'v')
+            ->leftJoin('v.validator', 'v2');
 
         return $query;
     }

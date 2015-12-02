@@ -238,4 +238,14 @@ abstract class AbstractOwned extends AbstractEntity implements
 
         return $this;
     }
+
+    /**
+     * Return the name of the site.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }
