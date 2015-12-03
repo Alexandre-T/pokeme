@@ -22,17 +22,30 @@ services:
         class: AppBundle\Model\VoteManager
         arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Vote']
 
-    admin.vote:
-        class: AppBundle\Admin\VoteAdmin
-        arguments: [~, AppBundle\Entity\Vote, ~]
+    admin.annuaire:
+        class: AppBundle\Admin\AnnuaireAdmin
+        arguments: [~, AppBundle\Entity\Annuaire, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Vote }
+            - { name: sonata.admin, manager_type: orm, label: Annuaire }
     admin.site:
         class: AppBundle\Admin\SiteAdmin
         arguments: [~, AppBundle\Entity\Site, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Site }
-
+    admin.vote:
+        class: AppBundle\Admin\VoteAdmin
+        arguments: [~, AppBundle\Entity\Vote, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Vote }
+#    admin.log:
+#        class: AppBundle\Admin\LogEntryAdmin
+#        arguments:
+#          - ~
+#          - AppBundle\Entity\LogEntry
+#          - ~
+#          -
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, label: Logs }
 
     gedmo_doctrine_extensions.listener.ip_traceable:
         class: Gedmo\IpTraceable\IpTraceableListener

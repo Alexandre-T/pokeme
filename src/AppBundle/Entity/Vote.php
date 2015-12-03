@@ -203,4 +203,14 @@ class Vote extends AbstractEntity implements TimestampableInterface, IpTraceable
 
         return $this;
     }
+
+    /**
+     * Return the name of the site.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Vote ' . $this->getId();
+    }
 }
