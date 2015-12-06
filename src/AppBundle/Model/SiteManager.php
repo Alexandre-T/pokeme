@@ -32,7 +32,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class SiteManager
+class SiteManager implements SiteManagerInterface
 {
     /**
      * Object Manager.

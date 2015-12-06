@@ -1,6 +1,9 @@
 AppBundle\Entity\Validation:
   type: entity
   table: te_validation_val
+  gedmo:
+      loggable:
+        loggable: true
   id:
     id:
       type: integer
@@ -18,6 +21,8 @@ AppBundle\Entity\Validation:
       column: sit_raison
       options:
         comment: Explication de la décision
+      gedmo:
+        - versioned
     status:
       type: smallint
       nullable: false
@@ -25,6 +30,8 @@ AppBundle\Entity\Validation:
       options:
         default: 2
         comment: Statut de l entité validée (refusé, en attente, accepté)
+      gedmo:
+        - versioned
     created:
       type: datetime
       nullable: false

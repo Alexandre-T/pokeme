@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the JDR Application.
+ * This file is part of the PokeMe Application.
  *
  * PHP version 5
  *
@@ -16,7 +16,6 @@
  */
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Validation;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -52,6 +51,7 @@ class AnnuaireAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'start',
     );
+
     /**
      * Configure Show mapper.
      *
@@ -65,56 +65,23 @@ class AnnuaireAdmin extends Admin
         $showMapper
             ->tab('General') // the tab call is optional
                 ->with('Information', array(
-                    'class'       => 'col-md-8',
-                    'box_class'   => 'box box-solid box-primary',
-                    'description' => 'Lorem ipsum',
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-primary',
                 ))
                 ->add('name')
                 ->add('description')
-                ->add('url','url')
+                ->add('url', 'url')
                 ->add('owner')
-                ->end()
-            ->end()
-            ->tab('Validation') // the tab call is optional
-                ->with('Validation', array(
-                    'class'       => 'col-md-4',
-                    'box_class'   => 'box box-solid box-info',
-                    'description' => 'Lorem ipsum',
-                ))
-                ->add('validation.status', 'choice', array(
-                    'choices' => array(
-                        Validation::ACCEPTE => 'Accepté',
-                        Validation::EN_ATTENTE => 'En attente',
-                        Validation::REFUSE => 'Refusé',
-                    ), ))
-                ->add('validation.reason')
-                ->add('validation.validator')
-                ->add('validation.created')
-                ->add('validation.updated')
                 ->end()
             ->end()
             ->tab('Sites') // the tab call is optional
                 ->with('Data', array(
-                    'class'       => 'col-md-8',
-                    'box_class'   => 'box box-solid box-default',
-                    'description' => 'Lorem ipsum',
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-default',
                 ))
                 ->add('sites')
                 ->end()
             ->end()
-            ->tab('Create and Update data') // the tab call is optional
-                ->with('Information', array(
-                    'class'       => 'col-md-4',
-                    'box_class'   => 'box box-solid box-default',
-                    'description' => 'Lorem ipsum',
-                ))
-                ->add('created')
-                ->add('ipCreator')
-                ->add('updated')
-                ->add('ipUpdater')
-                ->end()
-            ->end()
-
         ;
     }
 
@@ -127,11 +94,6 @@ class AnnuaireAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('created')
-            ->add('ipCreator')
-            ->add('ipUpdater')
-        ;
     }
 
     /**
@@ -143,11 +105,6 @@ class AnnuaireAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('created')
-            ->add('ipCreator')
-            ->add('ipUpdater')
-        ;
     }
 
     /**
@@ -162,20 +119,7 @@ class AnnuaireAdmin extends Admin
         $listMapper
             ->addIdentifier('name')
             ->add('url', 'url')
-            ->add('validation.status', 'choice', array(
-                'choices' => array(
-                    Validation::ACCEPTE => 'Accepté',
-                    Validation::EN_ATTENTE => 'En attente',
-                    Validation::REFUSE => 'Refusé',
-                ), ))
-            ->add('validation.validator')
             ->add('owner')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                )
-            ))
         ;
     }
 

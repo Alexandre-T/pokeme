@@ -16,6 +16,7 @@
  */
 namespace AppBundle\Entity;
 
+use AppBundle\Model\ValidationInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\ClassificationBundle\Model\Tag;
 
@@ -29,7 +30,7 @@ use Sonata\ClassificationBundle\Model\Tag;
  *
  * @link http://opensource.org/licenses/GPL-3.0
  */
-class Annuaire extends AbstractOwned
+class Annuaire extends AbstractOwned implements ValidationInterface
 {
     /**
      * Vote collection.
@@ -87,7 +88,7 @@ class Annuaire extends AbstractOwned
      *
      * @return Annuaire
      */
-    public function setValidation($validation)
+    public function setValidation(Validation $validation)
     {
         $this->validation = $validation;
 

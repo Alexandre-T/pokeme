@@ -211,6 +211,6 @@ class Vote extends AbstractEntity implements TimestampableInterface, IpTraceable
      */
     public function __toString()
     {
-        return 'Vote ' . $this->getId();
+        return 'Vote '.$this->getId();
     }
 }

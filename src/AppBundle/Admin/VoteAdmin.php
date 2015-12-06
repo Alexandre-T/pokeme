@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
  * Vote Admin Interface.
@@ -61,9 +62,6 @@ class VoteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('created')
-            ->add('ipCreator')
-            ->add('ipUpdater')
             ->add('tracker')
             ->add('point')
         ;
@@ -101,8 +99,6 @@ class VoteAdmin extends Admin
             ->add('user.username')
             ->add('site.name')
             ->add('annuaire.name')
-            ->add('created')
-            ->add('ipCreator')
             ->add('tracker')
             ->add('point')
             ->add('_action', 'actions', array(
@@ -110,9 +106,35 @@ class VoteAdmin extends Admin
                     'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
-                )
+                ),
             ))
         ;
+    }
+    /**
+     * Configure Show mapper.
+     *
+     * For a quick view.
+     *
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // Here we set the fields of the ShowMapper variable
+        $showMapper
+            ->tab('Vote')// the tab call is optional
+            ->with(
+                'Information',
+                array(
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-primary',
+                )
+            )
+            ->add('site')
+            ->add('annuaire')
+            ->add('tracker')
+            ->add('point')
+            ->end()
+            ->end();
     }
 
     /**

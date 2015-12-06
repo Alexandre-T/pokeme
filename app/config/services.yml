@@ -22,6 +22,19 @@ services:
         class: AppBundle\Model\VoteManager
         arguments: [@doctrine.orm.entity_manager, 'AppBundle\Entity\Vote']
 
+    #Sonata Admin Extensions
+    app.validation.extension:
+        class: AppBundle\Admin\Extension\ValidationAdminExtension
+        tags:
+            - { name: sonata.admin.extension, target: admin.site }
+            - { name: sonata.admin.extension, target: admin.annuaire }
+    app.log.extension:
+        class: AppBundle\Admin\Extension\HistoryAdminExtension
+        tags:
+            - { name: sonata.admin.extension, target: admin.site }
+            - { name: sonata.admin.extension, target: admin.annuaire }
+            - { name: sonata.admin.extension, target: admin.vote }
+    #Sonata Admin
     admin.annuaire:
         class: AppBundle\Admin\AnnuaireAdmin
         arguments: [~, AppBundle\Entity\Annuaire, ~]
@@ -30,6 +43,8 @@ services:
     admin.site:
         class: AppBundle\Admin\SiteAdmin
         arguments: [~, AppBundle\Entity\Site, ~]
+        calls:
+            - ['setSiteManager', [@app.site_manager]]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Site }
     admin.vote:
@@ -47,6 +62,13 @@ services:
 #        tags:
 #            - { name: sonata.admin, manager_type: orm, label: Logs }
 
+    app.doctrine.listener.validation_updater:
+        class: AppBundle\DoctrineListener\ValidationUpdater
+        calls:
+          - ['setContainer', [@service_container]]
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+
     gedmo_doctrine_extensions.listener.ip_traceable:
         class: Gedmo\IpTraceable\IpTraceableListener
         public: false
@@ -60,6 +82,6 @@ services:
         scope: request
         arguments:
             - @gedmo_doctrine_extensions.listener.ip_traceable
-            - @?request
+            - @?request_stack
         tags:
             - { name: kernel.event_subscriber}

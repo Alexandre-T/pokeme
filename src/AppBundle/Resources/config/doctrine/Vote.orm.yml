@@ -20,6 +20,15 @@ AppBundle\Entity\Vote:
       gedmo:
         timestampable:
           on: create
+    updated:
+      type: datetime
+      nullable: true
+      column: vot_update
+      options:
+        comment: Update date
+      gedmo:
+        timestampable:
+          on: update
     ipCreator:
       type: string
       length: 45

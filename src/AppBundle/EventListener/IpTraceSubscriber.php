@@ -17,6 +17,7 @@
 namespace AppBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class IpTraceSubscriber implements EventSubscriberInterface
      *
      * @var Request
      */
-    private $request;
+    private $requestStack;
 
     /**
      * Listener.
@@ -48,34 +49,46 @@ class IpTraceSubscriber implements EventSubscriberInterface
      */
     private $ipTraceableListener;
 
-    public function __construct(IpTraceableListener $ipTraceableListener, Request $request = null)
+    /**
+     * IpTraceSubscriber constructor.
+     *
+     * @param IpTraceableListener $ipTraceableListener
+     * @param RequestStack|null $requestStack
+     */
+    public function __construct(IpTraceableListener $ipTraceableListener, RequestStack $requestStack = null)
     {
         $this->ipTraceableListener = $ipTraceableListener;
-        $this->request = $request;
+        $this->requestStack = $requestStack;
     }
 
     /**
-     * Set the username from the security context by listening on core.request.
+     * Set the ip by listening on core.request.
      *
      * @param GetResponseEvent $event
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (null === $this->request) {
+        if (null === $this->requestStack) {
+            return;
+        }
+        $request = $this->requestStack->getCurrentRequest();
+
+        if (null === $request) {
             return;
         }
 
-        // If you use a cache like Varnish, you may want to set a proxy to Request::getClientIp() method
-        // $this->request->setTrustedProxies(array('127.0.0.1'));
-
-        // $ip = $_SERVER['REMOTE_ADDR'];
-        $ip = $this->request->getClientIp();
+        $ip = $request->getClientIp();
 
         if (null !== $ip) {
             $this->ipTraceableListener->setIpValue($ip);
         }
     }
 
+    /**
+     * Returns an array of event names this subscriber wants to listen to (onKernelRequest here).
+     *
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
         return array(

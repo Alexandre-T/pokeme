@@ -16,11 +16,12 @@
  */
 namespace AppBundle\Admin;
 
-use AppBundle\Entity\Validation;
+use AppBundle\Model\SiteManagerInterface;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 /**
  * Site Admin Interface.
@@ -53,6 +54,13 @@ class SiteAdmin extends Admin
     );
 
     /**
+     * Gestionnaire de site.
+     *
+     * @var SiteManagerInterface
+     */
+    protected $siteManager;
+
+    /**
      * Configure Form Fields.
      *
      * For edit and create actions.
@@ -62,9 +70,15 @@ class SiteAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('created')
-            ->add('ipCreator')
-            ->add('ipUpdater')
+            ->with('General', array(
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-primary',
+                    'description' => 'Lorem ipsum',
+                ))
+                ->add('name')
+                ->add('description')
+                ->add('url')
+            ->end()
         ;
     }
 
@@ -77,11 +91,6 @@ class SiteAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper
-            ->add('created')
-            ->add('ipCreator')
-            ->add('ipUpdater')
-        ;
     }
 
     /**
@@ -94,22 +103,40 @@ class SiteAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->add('name', 'string', array('editable' => true))
             ->add('url', 'url')
-            ->add('validation.status', 'choice', array(
-                'choices' => array(
-                    Validation::ACCEPTE => 'Accepté',
-                    Validation::EN_ATTENTE => 'En attente',
-                    Validation::REFUSE => 'Refusé',
-                ), ))
-            ->add('validation.validator')
-            ->add('owner')
-            ->add('_action', 'actions', array(
-                'actions' => array(
-                    'show' => array(),
-                    'edit' => array(),
-                )
-            ))
+        ;
+    }
+
+    /**
+     * Configure Show mapper.
+     *
+     * For a quick view.
+     *
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $showMapper
+            ->tab('Site') // the tab call is optional
+                ->with('Information', array(
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-primary',
+                    ))
+                    ->add('name')
+                    ->add('description')
+                    ->add('url', 'url')
+                    ->add('owner')
+                ->end()
+            ->end()
+            ->tab('Site') // the tab call is optional
+                ->with('Annuaire', array(
+                    'class' => 'col-md-8',
+                    'box_class' => 'box box-solid box-default',
+                ))
+                ->add('annuaires')
+                ->end()
+            ->end()
         ;
     }
 
@@ -133,5 +160,25 @@ class SiteAdmin extends Admin
             ->leftJoin('v.validator', 'v2');
 
         return $query;
+    }
+
+    /**
+     * Setter du gestionnaire de site.
+     *
+     * @param SiteManagerInterface $siteManager
+     */
+    public function setSiteManager(SiteManagerInterface $siteManager)
+    {
+        $this->siteManager = $siteManager;
+    }
+
+    /**
+     * Getter du gestionnaire de site.
+     *
+     * @return SiteManagerInterface
+     */
+    public function getSiteManager()
+    {
+        return $this->siteManager;
     }
 }
